@@ -2,36 +2,36 @@
 
 > Filled in live during the **Studio Charter** session in week 3. Every section below is committed in the same commit at the end of that class block. See [Studio Charter (single-session inception)](https://courses.lpcordova.phd/data510/project-framework/charter-inception.html) for the script and time-boxes.
 
-**Owner team:** Emery Kerani
-**Owner Product Lead:** <name>
-**Peer Stakeholder POs:** <names of your 2 or 3 peer PO individuals>
-**Instructor / Sponsor:** Lucas Cordova (`LucasCordova` on GitHub)
-**GitHub repo:** <link to this repo>
-**GitHub Projects board:** <[link](https://github.com/users/eskerani/projects/1)>
-**Discord category:** `#<project>-*`
-**Studio Session:** <1, 2, or 3>
-**Studio formed:** <date>
+* **Owner team:** Emery Kerani
+* **Owner Product Lead:** <name>
+* **Peer Stakeholder POs:** Mary Rose Krouse, Shanti Brodnick, & Rohan Srinivas Babu
+* **Instructor / Sponsor:** Lucas Cordova (`LucasCordova` on GitHub)
+* **GitHub repo:** [link](https://github.com/eskerani/prison-predictor-capstone)
+* **GitHub Projects board:** [link](https://github.com/users/eskerani/projects/1)
+* **Discord category:** `#<project>-*`
+* **Studio Session:** 1
+* **Studio formed:** <date>
 
 ## Vision
 
-One or two sentences. The world (or organization, or domain) if this project succeeds.
+This project aims to examine the prison-industrial complex and the effectiveness of our current criminal legal system. I come at the project with the goal of moving away from incarceration as a solution, based on the idea that incarceration does not adequately address the root causes of violence or crime.
 
 ## Mission
 
-One or two sentences. What the owner team will actually do this semester.
+I will use machine learning methods to assess the predictive power of crime rates, poverty rates, and racial diversity relative to incarceration rates across the United States and over time.
 
 ## Context
 
-- **Users / affected parties:** who benefits, who is at risk, who might use the result.
-- **Data sources (proposed):** named sources, access status, license / ethics notes.
+- **Users / affected parties:** The primary beneficiaries of this research are incarcerated folks, their families and communities, and others who are most at risk of incarceration. There are many transformative justice organizations that could potentially use the result to advocate for reforms to the criminal legal system. 
+- **Data sources (proposed):** Incarceration rates from the Bureau of Justice Stastistics site | Crime rates from **???** | Poverty rates from the US Census | Race data from **???**
 - **Constraints:** time, compute, access, skills, scope.
 - **Ethics risks:** consent, retention, PII, fairness, deployment risk.
 
 ## Success criteria by milestone
 
-- **M1, proposal (W4):** <measurable criterion>
-- **M2, data summary (W7):** <measurable criterion>
-- **M3, poster rough draft (W10):** <measurable criterion>
+- **M1, proposal (W4):** Proposal is complete and turned in.
+- **M2, data summary (W7):** All data sources are sourced, cleaned, and joined. 
+- **M3, poster rough draft (W10):** Poster draft is complete, with at least 3 drafted visualizations.
 - **M4, write-up rough draft (W12):** <measurable criterion>
 - **M5, final write-up and poster (W14):** <measurable criterion>
 
@@ -43,8 +43,10 @@ One or two sentences. What the owner team will actually do this semester.
 
 ## Working agreements (triad with peer POs)
 
-- **Studio Brief due:** <example: by 5 pm the day before class, committed to `studio/briefs/W<NN>-<peer>.md` and linked in `#<project>-studio` on Discord>. If the owner team needs the peer POs to read or review something specific *before* the Studio Session (a data preview, model results, a draft figure), file the Brief earlier so the peer POs actually have time to do that homework. Otherwise the default is "before the Studio Session starts."
-- **Studio Critique due:** <example: by the end of class for the in-person discussion, or at an agreed-upon time within one day after class (e.g., 5 pm the next day) if the peer PO needs extra time to draft a thoughtful write-up>.
+- **Studio Brief due:** by 12pm the Sunday before class
+- <example: by 5 pm the day before class, committed to `studio/briefs/W<NN>-<peer>.md` and linked in `#<project>-studio` on Discord>. If the owner team needs the peer POs to read or review something specific *before* the Studio Session (a data preview, model results, a draft figure), file the Brief earlier so the peer POs actually have time to do that homework. Otherwise the default is "before the Studio Session starts."
+- **Studio Critique due:** by 12pm the day after class
+- <example: by the end of class for the in-person discussion, or at an agreed-upon time within one day after class (e.g., 5 pm the next day) if the peer PO needs extra time to draft a thoughtful write-up>.
 - **Priority conflict resolution:** owner team integrates briefs in good faith; the instructor arbitrates (as Process Expert) if peer POs and owner team disagree.
 
 ## Response SLAs (Service Level Agreements)
@@ -98,5 +100,5 @@ A PBI is done, and may be moved from `Analyze` into `Done`, when:
 
 ### How to reach us
 - Discord category: `#<project>-general` (day-to-day), `#<project>-studio` (Briefs and Critiques), `#<project>-blockers` (impediments)
-- GitHub repo: <link>
-- GitHub Projects board: <link>
+- GitHub repo: [link](https://github.com/eskerani/prison-predictor-capstone)
+- GitHub Projects board: [link](https://github.com/users/eskerani/projects/1)
