@@ -16,35 +16,55 @@ This file is the **human-readable mirror** of the [GitHub Projects (v2) Iterativ
 
 ### PBI-001
 
-- **Title:** Acquire and document <dataset>
-- **Hypothesis:** <dataset> is accessible, license-compatible, and large enough to answer <RQ>.
-- **Create:** ingestion script and `data/README.md` section describing schema.
-- **Observe:** row counts, missingness, key uniqueness, distribution sanity checks.
-- **Analyze:** decide whether the dataset survives feasibility; document in the next Iteration Review.
+- **Title:** Source race data
+- **Hypothesis:** Data about race will be the hardest to find!
+- **Create:** comment several options for data sets.
+- **Observe:** document the scope and variables of each data set.
+- **Analyze:** choose a data set that is the best fit.
 - **Tag:** `M1-proposal`
 - **Size:** M
-- **GitHub issue:** <link once filed>
+- **GitHub issue:** [link](https://github.com/eskerani/prison-predictor-capstone/issues/1)
 
 ### PBI-002
 
-- **Title:** Draft research question and frame as a testable claim
+- **Title:** Finalize research question
 - **Hypothesis:** We can state the project's research question in one sentence that names the population, the predictor or treatment, and the outcome.
-- **Create:** RQ statement in `CHARTER.md` Mission section; one-paragraph framing in the proposal draft.
-- **Observe:** can a peer PO who has never seen the project repeat the question back accurately?
-- **Analyze:** revise based on Studio Brief feedback.
+- **Create:** make any necessary edits to the current research question.
+- **Observe:** compare the draft question to the PRIDE framework.
+- **Analyze:** finalize changes.
 - **Tag:** `M1-proposal`
 - **Size:** S
-- **GitHub issue:** <link once filed>
+- **GitHub issue:** [link](https://github.com/eskerani/prison-predictor-capstone/issues/2)
 
 ### PBI-003
 
-- **Title:** ...
-- **Hypothesis:** ...
-- **Create:** ...
-- **Observe:** ...
-- **Analyze:** ...
-- **Tag:** ...
-- **Size:** ...
-- **GitHub issue:** ...
+- **Title:** Choose a machine learning method to use
+- **Hypothesis:** I will need to find one algorithm that would work best with non-linear, highly variable data (possibly in an ensemble). 
+- **Create:** list options for methods to use.
+- **Observe:** find pros and cons of each relative to the data I have.
+- **Analyze:** choose an algorithm.
+- **Tag:** `M1-proposal`
+- **Size:** M
+- **GitHub issue:** [link](https://github.com/eskerani/prison-predictor-capstone/issues/3)
 
-<!-- Add more PBIs below following the same shape. -->
+### PBI-004
+
+- **Title:** Get data sources approved
+- **Hypothesis:** I think my data sources will be good but I will find out. 
+- **Create:** write a discord message to Professor Cordova.
+- **Observe:** look at his answer.
+- **Analyze:** NA
+- **Tag:** `M1-proposal`
+- **Size:** S
+- **GitHub issue:** [link](https://github.com/eskerani/prison-predictor-capstone/issues/4)
+
+### PBI-005
+
+- **Title:** Create ERD for data
+- **Hypothesis:** I will diagram a reasonable method of data organization. 
+- **Create:** make a table for each data source.
+- **Observe:** find connections between the tables.
+- **Analyze:** note any transformations that will be necessary to make the data make sense
+- **Tag:** `M1-proposal`
+- **Size:** S
+- **GitHub issue:** [link](https://github.com/eskerani/prison-predictor-capstone/issues/5)
