@@ -2,15 +2,15 @@
 
 > Filled in live during the **Studio Charter** session in week 3. Every section below is committed in the same commit at the end of that class block. See [Studio Charter (single-session inception)](https://courses.lpcordova.phd/data510/project-framework/charter-inception.html) for the script and time-boxes.
 
-* **Owner team:** Emery Kerani
-* **Owner Product Lead:** <name>
+* **Owner team:** 12
+* **Owner Product Lead:** Emery Kerani
 * **Peer Stakeholder POs:** Mary Rose Krouse, Shanti Brodnick, & Rohan Srinivas Babu
 * **Instructor / Sponsor:** Lucas Cordova (`LucasCordova` on GitHub)
 * **GitHub repo:** [link](https://github.com/eskerani/prison-predictor-capstone)
 * **GitHub Projects board:** [link](https://github.com/users/eskerani/projects/1)
 * **Discord category:** `#<project>-*`
 * **Studio Session:** 1
-* **Studio formed:** <date>
+* **Studio formed:** 5/25/26
 
 ## Vision
 
@@ -25,7 +25,7 @@ I will use machine learning methods to assess the predictive power of crime rate
 - **Users / affected parties:** The primary beneficiaries of this research are incarcerated folks, their families and communities, and others who are most at risk of incarceration. There are many transformative justice organizations that could potentially use the result to advocate for reforms to the criminal legal system. 
 - **Data sources (proposed):** Incarceration rates from the Bureau of Justice Stastistics site | Crime rates from **???** | Poverty rates from the US Census | Race data from **???**
 - **Constraints:** time, compute, access, skills, scope.
-- **Ethics risks:** consent, retention, PII, fairness, deployment risk.
+- **Ethics risks:** All statements will have to be hedged by the fact that I'm only looking at correlation, not causation. There may be covariance present in the data.
 
 ## Success criteria by milestone
 
