@@ -21,17 +21,17 @@ I will use machine learning methods to assess the predictive power of crime rate
 ## Context
 
 - **Users / affected parties:** The primary beneficiaries of this research are incarcerated folks, their families and communities, and others who are most at risk of incarceration. There are many transformative justice organizations that could potentially use the result to advocate for reforms to the criminal legal system. 
-- **Data sources (proposed):** Incarceration rates from the Bureau of Justice Stastistics site | Crime rates from **???** | Poverty rates from the US Census | Race data from **???**
+- **Data sources (proposed):** Incarceration rates from the Bureau of Justice Stastistics [site](https://csat.bjs.ojp.gov/advanced-query) | Crime rates from The FBI's Crime Data [Explorer](https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/downloads) | Poverty rates from the [US Census](https://www.census.gov/data/tables/time-series/demo/income-poverty/historical-poverty-people.html) | Race data from **???**
 - **Constraints:** One major constraint is that I cannot possibly interrogate every social factor that may contribute to incarceration, especially given that many may not have data readily available. Doing this project as just one person may also very well be a constraint on how much I can realistically get done.
 - **Ethics risks:** All statements will have to be hedged by the fact that I'm only looking at correlation, not causation. There may also be covariance present in the data.
 
 ## Success criteria by milestone
 
-- **M1, proposal (W4):** Proposal is complete and turned in.
-- **M2, data summary (W7):** All data sources are sourced, cleaned, and joined. 
-- **M3, poster rough draft (W10):** Poster draft is complete, with at least 3 drafted visualizations.
-- **M4, write-up rough draft (W12):** Interactive markdown has been drafted.
-- **M5, final write-up and poster (W14):** <measurable criterion>
+- **M1, proposal (W4):** All data sources have been identified, the research question is finalized, and a plan to clean the data is in place.
+- **M2, data summary (W7):** All data sources are cleaned and joined, with initial exploratory graphs and descriptive statistics created. 
+- **M3, poster rough draft (W10):** Create an initial layout and identify types of visualizations that will work best with the data.
+- **M4, write-up rough draft (W12):** Interactive markdown has been drafted; answer to research question as well as background/constraints/etc. have been considered and written.
+- **M5, final write-up and poster (W14):** Everything is ready to be presented and accessible to a wide variety of audiences!
 
 ## Working agreements (triad with peer POs)
 
