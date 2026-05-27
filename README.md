@@ -1,17 +1,15 @@
-# <Project Name>
-
-> One-sentence description of what this project is about. Replace this entire block before week 3.
+# Investigating Social Factors as Predictors of Incarceration Rates (better name pending)
 
 ## Quick reference
 
 | Field | Value |
 |-------|-------|
-| Owner team | <names> |
-| Owner Product Lead | <name> |
-| Peer Stakeholder POs | <names of your 2 or 3 peer PO individuals> |
-| Studio Session | <1, 2, or 3> |
-| GitHub repo | <link to this repo> |
-| GitHub Projects board | <link> |
+| Owner team | 12 |
+| Owner Product Lead | Emery Kerani |
+| Peer Stakeholder POs | Mary Rose Krouse, Shanti Brodnick, Rohan Srinivas Babu |
+| Studio Session | 1 |
+| GitHub repo | [link](https://github.com/eskerani/prison-predictor-capstone) |
+| GitHub Projects board | [link](https://github.com/users/eskerani/projects/1) |
 | Discord category | `#<project>-*` |
 | Instructor / Sponsor | Lucas Cordova (`LucasCordova` on GitHub) |
 
