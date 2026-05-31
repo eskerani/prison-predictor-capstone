@@ -39,4 +39,33 @@ data/
 
 ### Dataset 2: <name>
 
-- ...
+- **Source:** <URL or contact>
+- **License:** <name and short summary>
+- **Date pulled:** <YYYY-MM-DD>
+- **Approximate size:** <rows, columns, bytes>
+- **Owner on this project:** <name>
+- **Where it lives in this repo:** `data/raw/<name>/` (gitignored) or `data/processed/<name>.csv`
+- **Ethics / consent notes:** <PII? consent process? data use agreement?>
+- **How to fetch (for a teammate cloning fresh):** <command, script, or contact>
+
+### Dataset 3: <name>
+
+- **Source:** <URL or contact>
+- **License:** <name and short summary>
+- **Date pulled:** <YYYY-MM-DD>
+- **Approximate size:** <rows, columns, bytes>
+- **Owner on this project:** <name>
+- **Where it lives in this repo:** `data/raw/<name>/` (gitignored) or `data/processed/<name>.csv`
+- **Ethics / consent notes:** <PII? consent process? data use agreement?>
+- **How to fetch (for a teammate cloning fresh):** <command, script, or contact>
+
+### Dataset 4: <name>
+
+- **Source:** <URL or contact>
+- **License:** <name and short summary>
+- **Date pulled:** <YYYY-MM-DD>
+- **Approximate size:** <rows, columns, bytes>
+- **Owner on this project:** <name>
+- **Where it lives in this repo:** `data/raw/<name>/` (gitignored) or `data/processed/<name>.csv`
+- **Ethics / consent notes:** <PII? consent process? data use agreement?>
+- **How to fetch (for a teammate cloning fresh):** <command, script, or contact>
