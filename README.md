@@ -38,24 +38,26 @@ One subsection per class week. The owner team commits the new section **before e
 
 ## Week 4 -- Proposal milestone (M1)
 
-**Iteration ending:** <date>
+**Iteration ending:** 6/8
 **Milestone tag in focus:** `M1-proposal`
 
 **Completed PBIs**
-- ...
+- Choose machine learning method to use
 
 **In-flight (carrying across the boundary)**
-- ...
+- Refining research question
+- Sourcing race/other data
+- Data ERD
+- Get data sources approved
 
 **Stakeholder response log**
-- Studio Brief from <peer PO 1>: adopted = ..., deferred = ..., declined (with reason) = ...
-- Studio Brief from <peer PO 2>: adopted = ..., deferred = ..., declined (with reason) = ...
+- NA
 
 **Plan for next iteration**
 - Top PBIs (with milestone tags): ...
 
 **Risks and impediments**
-- ...
+- Finding data!!! It is more difficult than it should be
 
 ## Week 5
 
