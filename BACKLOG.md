@@ -68,3 +68,58 @@ This file is the **human-readable mirror** of the [GitHub Projects (v2) Iterativ
 - **Tag:** `M1-proposal`
 - **Size:** S
 - **GitHub issue:** [link](https://github.com/eskerani/prison-predictor-capstone/issues/5)
+
+### PBI-006
+
+- **Title:** Create data cleaning plan
+- **Hypothesis:** having a plan of attack will make it easier to approach cleaning data. 
+- **Create:** load all raw data into R.
+- **Observe:** note issues, anomalies, and any non-standard columns or steps that will need to be taken.
+- **Analyze:** in a Google Doc, write down all actions that will need to be performed for each data set in order for it to be ready to combine.
+- **Tag:** `M2-data-summary`
+- **Size:** M
+- **GitHub issue:** [link](https://github.com/eskerani/prison-predictor-capstone/issues/6)
+
+### PBI-007
+
+- **Title:** Clean data
+- **Hypothesis:** I can standardize all of my datasets to fit with each other. 
+- **Create:** follow the data cleaning plan to make changes to data as needed.
+- **Observe:** make sure everything looks good, combine datasets.
+- **Analyze:** pull preliminary metrics, correlation coefficient for all variables.
+- **Tag:** `M2-data-summary`
+- **Size:** M
+- **GitHub issue:** [link](https://github.com/eskerani/prison-predictor-capstone/issues/7)
+
+### PBI-008
+
+- **Title:** Write SVR pseudocode
+- **Hypothesis:** I can re-use the same code outline to train several different SVR models. 
+- **Create:** write repeatable pseudocode.
+- **Observe:** test with one variable set.
+- **Analyze:** troubleshoot any errors until code is working as planned.
+- **Tag:** `M3-draft-poster`
+- **Size:** S
+- **GitHub issue:** [link](https://github.com/eskerani/prison-predictor-capstone/issues/8)
+
+### PBI-009
+
+- **Title:** Run SVR
+- **Hypothesis:** either crime or police spending will be the most accurate.
+- **Create:** building off of the pseudocode, write code that will run SVR for all variables.
+- **Observe:** compare graphs and metrics for all models.
+- **Analyze:** document accuracy and evaluate which variable performed the best.
+- **Tag:** `M3-draft-poster`
+- **Size:** M
+- **GitHub issue:** [link](https://github.com/eskerani/prison-predictor-capstone/issues/9)
+
+### PBI-010
+
+- **Title:** Draft visualizations
+- **Hypothesis:** A line graph will likely be the most understandable kind of plot.
+- **Create:** draft 3 different visualization methods with pen and paper.
+- **Observe:** write down the pros and cons of each visualization style.
+- **Analyze:** choose the best method to use as primary visualization for poster.
+- **Tag:** `M3-draft-poster`
+- **Size:** S
+- **GitHub issue:** [link](https://github.com/eskerani/prison-predictor-capstone/issues/10)
