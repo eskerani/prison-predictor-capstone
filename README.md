@@ -1,16 +1,16 @@
-# Investigating Social Factors as Predictors of Incarceration Rates (better name pending)
+# Crime and What Else? Investigating the Predictive Power of Social Factors on Incarceration Rates
 
 ## Quick reference
 
 | Field | Value |
 |-------|-------|
-| Owner team | 12 |
+| Owner team | Emery Kerani |
 | Owner Product Lead | Emery Kerani |
 | Peer Stakeholder POs | Mary Rose Krouse, Shanti Brodnick, Rohan Srinivas Babu |
 | Studio Session | 1 |
 | GitHub repo | [link](https://github.com/eskerani/prison-predictor-capstone) |
 | GitHub Projects board | [link](https://github.com/users/eskerani/projects/1) |
-| Discord category | `#<project>-*` |
+| Discord category | `#Project 12: Emery-*` |
 | Instructor / Sponsor | Lucas Cordova (`LucasCordova` on GitHub) |
 
 ## What this repo contains
@@ -54,27 +54,30 @@ One subsection per class week. The owner team commits the new section **before e
 - NA
 
 **Plan for next iteration**
-- Top PBIs (with milestone tags): ...
+- Finish proposal (`M1`)
+- Fill out PBI backlog (`M1`)
 
 **Risks and impediments**
 - Finding data!!! It is more difficult than it should be
 
 ## Week 5
 
-**Iteration ending:** <date>
+**Iteration ending:** 6/15
 **Milestone tag in focus:** `M1-proposal` / `M2-data-summary`
 
 **Completed PBIs**
-- ...
+- Finalize research question
+- Source race data
 
 **Stakeholder response log**
-- ...
+- NA
 
 **Plan for next iteration**
-- ...
+- Audit data and create detailed cleaning plan (`M2`)
+- Start cleaning poverty and incarceration datasets (`M2`)
 
 **Risks and impediments**
-- ...
+- Again, spent a lot longer just finding the data than I would have liked
 
 ## Week 6
 
