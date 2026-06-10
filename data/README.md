@@ -74,16 +74,11 @@ data/
 
 ### Dataset 4: Police Spending
 
-- **Source:** Will be constructed from five different tables:
-          - https://www.census.gov/programs-surveys/gov-finances/data/historical-data.html (1951-2008)
-          - https://www.census.gov/data/tables/2009/econ/state/historical-tables.html (2009)
-          - https://www.census.gov/data/tables/2010/econ/state/historical-tables.html (2010)
-          - https://www.census.gov/data/tables/2011/econ/state/historical-tables.html (2011)
-          - https://data.census.gov/table/GOVSSTATEFINTIMESERIES.GS00STATEFIN03?q=State%20and%20Local%20Government%20Finances&nkd=AGG_DESC~SF0158%3ASF0342%3ASF0343%3ASF0344%3ASF0345%3ASF0346%3ASF0365&colSort=AGG_DESC_LABEL~desc (2012-2024)
-- **License:** These data are made available by the Census Bureau, under the condition that the Census Bureau is cited as the original data source.
-- **Date pulled:** 2026-04-06
-- **Approximate size:** In order: 2,988 rows x 11 columns, 270 kb | 64 rows x 52 columns, 53 kb for all single-year files | 3,520 rows x 9 columns, 819 kb
+- **Source:** https://state-local-finance-data.taxpolicycenter.org/pages.cfm#
+- **License:** These data are compiled by the Urban Institute based on data collected and released by the Census Bureau; both institutions should be recognized in a citation. 
+- **Date pulled:** 2026-09-06
+- **Approximate size:** In order: 2,030 rows x 6 columns, 613 kb
 - **Owner on this project:** Emery Kerani
-- **Where it lives in this repo:** All in `data/raw/spending/` as `state_police_other_exp_80-08`, `09statess`, `10statess`, `11statess`, and `GOVSSTATEFINTIMESERIES.GS00STATEFIN03-2026-06-04T204123`, respectively
+- **Where it lives in this repo:** `data/raw/police_spending_all.xls`
 - **Ethics / consent notes:** Data do not concern individual people but rather government spending
-- **How to fetch (for a teammate cloning fresh):** For the 1951-2008 data, access the URL and download the *State_Govt_Fin* zip file under Historical Datasets. Follow the instructions for accessing the database contained in the *How_to_Query_MS_Access_DB_in_Excel* file, and select `Year4`, `Name1`, `Population(000)`, and `Police Prot-Total Exp_PC` as columns to include, then save the file. For single-year data, access the URLs and downlaod the *State Government Finances Summary Table* file. For 2012, 2024 data, follow the URL and press the download table button. 
+- **How to fetch (for a teammate cloning fresh):** Access the Urban Institute's site via the url above; hit the get starte button; select *State and Local* as the level of government; select all states; select items E087, E088, and E089 for the series; select years 1980-2020; select *per capita* for the units and *real* under nominal/real; hit view results and export as an excel.
