@@ -12,3 +12,10 @@
 * States with the highest average percentage of poverty across time: Mississippi (20.95%), Louisiana (19.96%), New Mexico (19.61%)
 * States with the lowest average percentage of poverty across time: Maryland (9.05%), Connecticut (8.67%), New Hampshire (6.84%)
 * Years with the highest average percentage of poverty across states: 
+
+## Police spending:
+* States with the highest average per capita police spending across time: Alaska ($548), New York ($492), and California ($446)
+* States with the lowest average per capita police spending across time: Arkansas ($201), Kentucky ($186), and West Virginia ($174)
+* Years with the highest median per capita police spending across states: 2020 ($388), 2019 ($382), 2018 ($373)
+* Years with the lowest median per capita police spending across states: 1982 ($188), 1980 ($178), 1981 ($175)
+* Between 1981 (lowest) and 2020 (highest), median per capita spending on police in the US has grown 121%
