@@ -19,3 +19,9 @@
 * Years with the highest median per capita police spending across states: 2020 ($388), 2019 ($382), 2018 ($373)
 * Years with the lowest median per capita police spending across states: 1982 ($188), 1980 ($178), 1981 ($175)
 * Between 1981 (lowest) and 2020 (highest), median per capita spending on police in the US has grown 121%
+
+## Race:
+* States with the highest average percentage of non-white residents across time: Hawai'i (74%), Mississippi (39%), and Georgia (34%)
+* States with the lowest average percentage of non-white residents across time: New Hampshire (3%), Maine (3%), and Vermont (3%)
+* Years with the highest median percentage of non-white residents across states: 2018 (20%), 2017 (20%), 2020 (19%)
+* Years with the highest median percentage of non-white residents across states: 1989 (10%), 1987 (10%), 1980 (9%)
