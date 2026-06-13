@@ -9,9 +9,10 @@
 * Between 1979 (lowest) and 2008 (highest), the median rate of incarceration in the US grew almost 300%. The median raw prison population across all states exploded from 3,592 in 1979 to 22,431 in 2007 (over 500% increase)
 
 ## Poverty:
-* States with the highest average percentage of poverty across time: Mississippi (20.95%), Louisiana (19.96%), New Mexico (19.61%)
-* States with the lowest average percentage of poverty across time: Maryland (9.05%), Connecticut (8.67%), New Hampshire (6.84%)
-* Years with the highest average percentage of poverty across states: 
+* States with the highest average percentage of poverty across time: Mississippi (21%), Louisiana (20%), New Mexico (19.5%)
+* States with the lowest average percentage of poverty across time: Maryland (9.05%), Connecticut (8.6%), New Hampshire (6.8%)
+* Years with the highest median percentage of poverty across states: 1983 (15.3%), 2011 (14.3%), 2010 (14.2%)
+* Years with the lowest median percentage of poverty across states: 2023 (9.8%), 2019 (9.6%), 2024 (9.4%)
 
 ## Police spending:
 * States with the highest average per capita police spending across time: Alaska ($548), New York ($492), and California ($446)
