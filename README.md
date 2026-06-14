@@ -81,20 +81,22 @@ One subsection per class week. The owner team commits the new section **before e
 
 ## Week 6
 
-**Iteration ending:** <date>
+**Iteration ending:** 6/22
 **Milestone tag in focus:** `M2-data-summary`
 
 **Completed PBIs**
-- ...
+- Create ERD
+- Create data cleaning plan
+- Clean race, poverty, incarceration, and spending data
 
 **Stakeholder response log**
-- ...
+- NA (nothing submitted as of writing)
 
 **Plan for next iteration**
-- ...
+- Finish cleaning crime data/pulling stats and get to work on data summary
 
 **Risks and impediments**
-- ...
+- A couple unexpected issues came up while data cleaning that will for sure have to be noted in the final project!
 
 ## Week 7 -- Data summary milestone (M2)
 
