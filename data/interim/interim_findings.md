@@ -25,4 +25,12 @@
 * States with the highest average percentage of non-white residents across time: Hawai'i (74%), Mississippi (39%), and Georgia (34%)
 * States with the lowest average percentage of non-white residents across time: New Hampshire (3%), Maine (3%), and Vermont (3%)
 * Years with the highest median percentage of non-white residents across states: 2018 (20%), 2017 (20%), 2020 (19%)
-* Years with the highest median percentage of non-white residents across states: 1989 (10%), 1987 (10%), 1980 (9%)
+* Years with the lowest median percentage of non-white residents across states: 1989 (10%), 1987 (10%), 1980 (9%)
+
+## Crime:
+* States with the highest average proportion of violent crime across time: New York (17%), Massachusetts (16%), and Maryland (16%)
+* States with the highest average proportion of violent crime across time: Hawai'i (6%), Vermont (5.6%), and Maine (5%)
+* Years with the highest median proportion of violent crime across states: 2021 (17%), 2020 (16.6%), 2022 (16.4%)
+* Years with the lowest median proportion of violent crime across states: 1979 (8.4%), 1981 (8.3%), 1980 (7.9%)
+* Between 1980 (lowest) and 2021 (highest), the median proportion of reported crimes that are violent has grown 115% - this is outmatched by both police spending and incarceration rates (incarceration rates moreso)
+* Even where violent crime is highest, the vast majority of crimes are property crimes.
