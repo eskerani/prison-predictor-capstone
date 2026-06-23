@@ -100,25 +100,25 @@ One subsection per class week. The owner team commits the new section **before e
 
 ## Week 7 -- Data summary milestone (M2)
 
-**Iteration ending:** <date>
+**Iteration ending:** 6/29
 **Milestone tag in focus:** `M2-data-summary`
 
 **Completed PBIs**
-- ...
+- Clean crime data
 
 **Stakeholder response log**
-- ...
+- Clarified some points in the project proposal. 
 
 **Plan for next iteration**
-- ...
+- Finalize combined dataframe, finish data summary
 
 **Risks and impediments**
-- ...
+- There are some weird things happening with the data but I think it will simply be fine!
 
 **Retrospective (milestone boundary)**
-- What worked: ...
-- What did not: ...
-- One change for next iteration: ...
+- What worked: Having the cleaning plan has been super helpful to refer back to!
+- What did not: Some PBIs will likely be too big and need to be broken down into subtasks.
+- One change for next iteration: Break down PBIs
 
 ## Week 8
 
