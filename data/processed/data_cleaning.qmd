@@ -1,0 +1,268 @@
+---
+title: "Crime and What Else? Data Cleaning Script"
+author: "Emery Kerani"
+format: 
+    html: default
+    pdf: default
+number-sections: true
+toc: true
+execute:
+    warning: false
+---
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(stringr)
+library(ipumsr)
+library(tidycensus)
+library(data.table)
+
+#install.packages('reticulate')
+library(reticulate)
+
+reticulate::conda_python('py3.8')
+```
+
+## Incarceration Rates Cleaning
+
+```{r}
+incarceration_rates <- read_xlsx('./annual_prison_counts.xlsx')
+
+names(incarceration_rates) <- incarceration_rates[1,]
+incarceration_rates <- incarceration_rates[-1,] %>%
+  pivot_longer(names_to = 'year', values_to = 'count', -c(State)) %>%
+  mutate(State = str_to_title(State),
+         year = as.numeric(year),
+         count = as.numeric(count)) %>%
+  filter(!(State %in% c("All 50 States", "Federal")))
+```
+
+## Poverty Rates Cleaning
+
+```{r}
+clean_poverty <- function(){
+  pov_rates <- read_xlsx('./hstpov19.xlsx')
+  
+  names(pov_rates) <- pov_rates[4,]
+  pov_rates <- pov_rates[-1:-4,]
+  pov_rates['year'] <- 0
+  
+  pov_rates <- pov_rates %>%
+    dplyr::select(-c(4)) %>%
+    filter(State %in% incarceration_rates$State) %>%
+    mutate(perc_in_pov = as.numeric(`Percent in poverty`),
+           `Total population` = as.numeric(`Total population`) * 1000,
+           `Number in poverty` = as.numeric(`Number in poverty`) * 1000) %>%
+    rename(tot_pop = `Total population`, num_pov = `Number in poverty`) %>%
+    select(c(State, year, tot_pop, num_pov, perc_in_pov))
+  
+  flag <- F
+  diff <- 0
+  next_row <- 1
+  for (j in 2024:1978){
+    
+    year <- j + diff
+    
+    if (year == 2017 & !flag){
+      for (i in next_row:(next_row+49)){
+        pov_rates[i, 2] <- year
+        next_row <- i + 1
+      }
+      flag <- T
+      
+    } else if (year == 2016 & flag){
+      for (i in next_row:(next_row+49)){
+        pov_rates[i, 2] <- 2017
+        next_row <- i + 1
+      }
+      flag <- F
+      diff <- diff + 1
+      
+    } else if (year == 2013 & !flag){
+      for (i in next_row:(next_row+49)){
+        pov_rates[i, 2] <- year
+        next_row <- i + 1
+      }
+      flag <- T
+      
+    } else if (year == 2012 & flag){
+      for (i in next_row:(next_row+49)){
+        pov_rates[i, 2] <- 2013
+        next_row <- i + 1
+      }
+      flag <- F
+      diff <- diff + 1
+      
+    } else {
+      for (i in next_row:(next_row+49)){
+        pov_rates[i, 2] <- year
+        next_row <- i + 1
+      }
+    }
+  }
+  
+  
+  pov_rates <- pov_rates %>%
+    group_by(State, year) %>%
+    summarize(tot_pop = mean(tot_pop),
+              num_pov = mean(as.numeric(num_pov)),
+              perc_in_pov = mean(perc_in_pov))
+  
+  return(pov_rates)
+}
+
+
+pov_rates <- clean_poverty()
+```
+
+## Police Spending Cleaning
+
+```{r}
+police_spending <- read_csv('./police_spending_all.csv') %>%
+  rename(year=Year, `tot_spending`=`(E087) Police Prot-Direct Exp`) %>%
+  select(c(State, year, tot_spending)) %>%
+  filter(!is.na(year) & State != 'DC') %>%
+  mutate(tot_spending = as.numeric(substring(tot_spending, 2)), 
+         year = as.numeric(year),
+         State = as.character(State))
+```
+
+## Race Data Cleaning
+
+```{r}
+if (!require("ipumsr")) stop("Reading IPUMS data into R requires the ipumsr package. It can be installed using the following command: install.packages('ipumsr')")
+
+ddi <- read_ipums_ddi("./cps_00001.xml")
+data <- read_ipums_micro(ddi)
+
+data('fips_codes') 
+
+fips_codes <- fips_codes %>%
+  group_by(state_code) %>%
+  slice(1) %>%
+  mutate(state_code = str_remove(state_code, "^0+"))
+
+data <- data %>%
+  mutate(race_text = ifelse(RACE == 100, 'White', 'Non-white'))
+
+race_agg <- data %>%
+  group_by(`YEAR`, `STATEFIP`, `race_text`) %>%
+  summarize(weight = sum(ASECWT)) %>%
+  mutate(race_pct = weight / sum(weight),
+         race_count = race_pct * 100000,
+         STATEFIP = as.character(STATEFIP)) %>%
+  filter(race_text == 'Non-white' & !is.na(race_count)) %>%
+  rename(year = YEAR) %>%
+  left_join(fips_codes, by = join_by(STATEFIP == state_code)) %>%
+  ungroup() %>%
+  select(c(year, state, state_name, race_pct, race_count))
+```
+
+## Crime Rate Cleaning
+
+```{r}
+crime_rates <- read_csv('./estimated_crimes_1979_2024.csv') %>%
+  select(year, state_abbr, state_name, population, violent_crime, property_crime) %>%
+  mutate(state_abbr = ifelse(is.na(state_abbr), 'US', state_abbr),
+         state_name = ifelse((is.na(state_name) | state_name=='United States Total'), 'National', state_name),
+         tot_crime = violent_crime + property_crime)
+```
+
+## Combining
+
+```{r}
+combined_df <- incarceration_rates %>%
+  left_join(crime_rates, by=join_by(State==state_name, year)) %>%
+  left_join(police_spending, by=join_by(State, year))%>%
+  left_join(race_agg, by=join_by(State==state_name,year)) %>%
+  left_join(pov_rates, by=join_by(State,year)) %>%
+  filter(year >= 1980 & year <= 2020 & State != 'District Of Columbia') %>%
+  rename(incarceration_count=count) %>%
+  group_by(year) %>%
+  mutate(tot_pop = ifelse(State == 'National', sum(tot_pop, na.rm=T), tot_pop),
+         perc_in_pov = ifelse(State == 'National', sum(num_pov, na.rm=T)/tot_pop*100, perc_in_pov),
+         race_pct = ifelse(State=='National', sum(race_count, na.rm=T)/tot_pop, race_pct))%>%
+  select(c(State, state_abbr, year, incarceration_count, violent_crime, property_crime, tot_crime, tot_spending, race_pct, tot_pop, population, perc_in_pov)) %>%
+  ungroup() %>%
+  arrange(State, year) %>%
+  mutate(incar_rate = incarceration_count / tot_pop * 100000,
+         tot_crime_rate = tot_crime / tot_pop * 100000,
+         violent_crime_rate = violent_crime / tot_pop * 100000,
+         prop_crime_rate = property_crime / tot_pop * 100000,
+         pov_rate = perc_in_pov * 1000,
+         non_white_rate = race_pct * 100000,
+         spending_rate = tot_spending * 100000,
+         prev_value = shift(spending_rate, n=1, type='lag'),
+         next_value = shift(spending_rate, n=1, type='lead'),
+         spending_rate = ifelse(is.na(spending_rate), ((prev_value + next_value)/2), spending_rate)) %>%
+  select(c(State, year, tot_pop, incar_rate, tot_crime_rate, violent_crime_rate, 
+           prop_crime_rate, pov_rate, non_white_rate, spending_rate)) %>%
+  arrange(year,State)
+```
+
+## EDA
+
+All EDA followed the same basic format, switching out the names for each dataset as needed:
+
+```{}
+incar_across_states <- incarceration_rates %>%
+  left_join(crime_rates, by = join_by(year==year, State==state_name)) %>%
+  select(c(year, State, population, count)) %>%
+  mutate(incar_rate = (count / population) * 100000) %>%
+  group_by(State) %>%
+  summarize(mean_incar = mean(incar_rate, na.rm=T)) %>%
+  arrange(desc(mean_incar))
+
+incar_across_years <- incarceration_rates %>%
+  left_join(crime_rates, by = join_by(year==year, State==state_name)) %>%
+  select(c(year, State, population, count)) %>%
+  mutate(incar_rate = (count / population) * 100000) %>%
+  group_by(year) %>%
+  summarize(mean_incar = median(incar_rate, na.rm=T), mean_pop = median(count, na.rm=T)) %>%
+  arrange(desc(mean_incar))
+```
+## Preprocessing
+
+```{r}
+library(reticulate)
+
+py_install('pandas')
+pd <- import('pandas')
+
+py_install('numpy')
+np <- import('numpy')
+
+py_install('scikit-learn')
+sklearn <- import('sklearn')
+```
+
+```{python}
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+
+df = pd.DataFrame(r.combined_df)
+
+print(df.head())
+```
+
+
+```{python}
+# Scaling predictor columns
+scaler = StandardScaler()
+
+df[['tot_crime_rate','violent_crime_rate','prop_crime_rate','pov_rate','non_white_rate','spending_rate']] = scaler.fit_transform(df[['incar_rate','tot_crime_rate','violent_crime_rate','prop_crime_rate','pov_rate','non_white_rate','spending_rate']])
+```
+
+
+```{python}
+# Creating national target for each state/year combo
+nat_dict = {}
+
+for row in df[df['State'] == 'National'].iterrows():
+    nat_dict[row[1]['year']] = row[1]['incar_rate']
+
+df['incarceration_rate_national'] = df['year'].apply(lambda x: nat_dict[x])
+
+print(df.head())
+```
