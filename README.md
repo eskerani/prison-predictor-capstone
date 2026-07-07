@@ -38,7 +38,7 @@ One subsection per class week. The owner team commits the new section **before e
 
 ## Week 4 -- Proposal milestone (M1)
 
-**Iteration ending:** 6/1
+**Iteration ending:** 6/8
 **Milestone tag in focus:** `M1-proposal`
 
 **Completed PBIs**
@@ -62,7 +62,7 @@ One subsection per class week. The owner team commits the new section **before e
 
 ## Week 5
 
-**Iteration ending:** 6/22
+**Iteration ending:** 6/15
 **Milestone tag in focus:** `M1-proposal` / `M2-data-summary`
 
 **Completed PBIs**
@@ -81,7 +81,7 @@ One subsection per class week. The owner team commits the new section **before e
 
 ## Week 6
 
-**Iteration ending:** 6/29
+**Iteration ending:** 6/22
 **Milestone tag in focus:** `M2-data-summary`
 
 **Completed PBIs**
@@ -100,7 +100,7 @@ One subsection per class week. The owner team commits the new section **before e
 
 ## Week 7 -- Data summary milestone (M2)
 
-**Iteration ending:** 7/6
+**Iteration ending:** 6/29
 **Milestone tag in focus:** `M2-data-summary`
 
 **Completed PBIs**
@@ -122,20 +122,22 @@ One subsection per class week. The owner team commits the new section **before e
 
 ## Week 8
 
-**Iteration ending:** 
+**Iteration ending:** 7/6
 **Milestone tag in focus:** `M3-poster-draft`
 
 **Completed PBIs**
-- ...
+- Clean data
+- Prepare data for SVR application
+- Write SVR pseudocode
 
 **Stakeholder response log**
-- ...
+- NA
 
 **Plan for next iteration**
-- ...
+- Work on draft poster!
 
 **Risks and impediments**
-- ...
+- Getting some unexpected results with SVR? So will be looking into that more
 
 ## Week 9
 
