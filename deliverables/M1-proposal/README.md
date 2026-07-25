@@ -1,7 +1,7 @@
 # Project Proposal README
 
-* Submission document can be found [here]
-* Rubric can be found [here]
+* Submission document can be found [here](https://docs.google.com/document/d/1JkwdteD4L3eitSxq9_zR_lJMpfxnph8tZstyn4-3vZA/edit?usp=sharing)
+* Rubric can be found [here](https://willamette.instructure.com/courses/10056/assignments/124616?module_item_id=541868)
 * Status: Peer-reviewed
 
 ## Related PBIs:
