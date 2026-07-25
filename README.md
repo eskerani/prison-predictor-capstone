@@ -141,59 +141,61 @@ One subsection per class week. The owner team commits the new section **before e
 
 ## Week 9
 
-**Iteration ending:** <date>
+**Iteration ending:** 7/13
 **Milestone tag in focus:** `M3-poster-draft`
 
 **Completed PBIs**
-- ...
+- Run SVR (mostly)
 
 **Stakeholder response log**
-- ...
+- NA
 
 **Plan for next iteration**
-- ...
+- Start visualizing and interpreting SVR outputs
+- Work on poster draft
 
 **Risks and impediments**
-- ...
+- None!
 
 ## Week 10 -- Poster rough-draft milestone (M3)
 
-**Iteration ending:** <date>
+**Iteration ending:** 7/20
 **Milestone tag in focus:** `M3-poster-draft`
 
 **Completed PBIs**
-- ...
+- Draft visualizations
 
 **Stakeholder response log**
-- ...
+- NA
 
 **Plan for next iteration**
-- ...
+- Work on writeup draft
 
 **Risks and impediments**
-- ...
+- NA
 
 **Retrospective (milestone boundary)**
-- What worked: ...
-- What did not: ...
-- One change for next iteration: ...
+- What worked: It was definitely good to be able to use the other milestones as a foundation for creating the poster draft.
+- What did not: I would love to give myself more time to work on the writeup, especially since it's more substantial.
+- One change for next iteration: Plan ahead for the writing part more!
 
 ## Week 11
 
-**Iteration ending:** <date>
+**Iteration ending:** 7/27
 **Milestone tag in focus:** `M4-writeup-draft`
 
 **Completed PBIs**
-- ...
+- None
 
 **Stakeholder response log**
-- ...
+- NA
 
 **Plan for next iteration**
-- ...
+- Finish draft writeup
+- Clean up poster draft, get ready to present
 
 **Risks and impediments**
-- ...
+- I haven't been able to get both R and Python running in the same script yet :(
 
 ## Week 12 -- Write-up rough-draft milestone (M4)
 
