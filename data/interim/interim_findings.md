@@ -1,0 +1,36 @@
+# Preliminary findings and EDA of individual cleaned data
+
+## Incarceration:
+
+* States with the highest average incarceration rate (per 100k) across time: Delaware (631), Louisiana (614), Alaska (582)
+* States with the lowest average incarceration rate (per 100k) across time: Massachusetts (141), Maine (134), Minnesota (126)
+* Years with the highest median incarceration rate (per 100k) across states: 2008 (433), 2010 (427), 2009 (426)
+* Years with the lowest median incarceration rate (per 100k) across states: 1981 (124), 1980 (110), 1979 (109)
+* Between 1979 (lowest) and 2008 (highest), the median rate of incarceration in the US grew almost 300%. The median raw prison population across all states exploded from 3,592 in 1979 to 22,431 in 2007 (over 500% increase)
+
+## Poverty:
+* States with the highest average percentage of poverty across time: Mississippi (21%), Louisiana (20%), New Mexico (19.5%)
+* States with the lowest average percentage of poverty across time: Maryland (9.05%), Connecticut (8.6%), New Hampshire (6.8%)
+* Years with the highest median percentage of poverty across states: 1983 (15.3%), 2011 (14.3%), 2010 (14.2%)
+* Years with the lowest median percentage of poverty across states: 2023 (9.8%), 2019 (9.6%), 2024 (9.4%)
+
+## Police spending:
+* States with the highest average per capita police spending across time: Alaska ($548), New York ($492), and California ($446)
+* States with the lowest average per capita police spending across time: Arkansas ($201), Kentucky ($186), and West Virginia ($174)
+* Years with the highest median per capita police spending across states: 2020 ($388), 2019 ($382), 2018 ($373)
+* Years with the lowest median per capita police spending across states: 1982 ($188), 1980 ($178), 1981 ($175)
+* Between 1981 (lowest) and 2020 (highest), median per capita spending on police in the US has grown 121%
+
+## Race:
+* States with the highest average percentage of non-white residents across time: Hawai'i (74%), Mississippi (39%), and Georgia (34%)
+* States with the lowest average percentage of non-white residents across time: New Hampshire (3%), Maine (3%), and Vermont (3%)
+* Years with the highest median percentage of non-white residents across states: 2018 (20%), 2017 (20%), 2020 (19%)
+* Years with the lowest median percentage of non-white residents across states: 1989 (10%), 1987 (10%), 1980 (9%)
+
+## Crime:
+* States with the highest average proportion of violent crime across time: New York (17%), Massachusetts (16%), and Maryland (16%)
+* States with the highest average proportion of violent crime across time: Hawai'i (6%), Vermont (5.6%), and Maine (5%)
+* Years with the highest median proportion of violent crime across states: 2021 (17%), 2020 (16.6%), 2022 (16.4%)
+* Years with the lowest median proportion of violent crime across states: 1979 (8.4%), 1981 (8.3%), 1980 (7.9%)
+* Between 1980 (lowest) and 2021 (highest), the median proportion of reported crimes that are violent has grown 115% - this is outmatched by both police spending and incarceration rates (incarceration rates moreso)
+* Even where violent crime is highest, the vast majority of crimes are property crimes.

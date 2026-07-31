@@ -1,4 +1,4 @@
-# Backlog: <project name>
+# Backlog: Crime and What Else? Investigating the Predictive Power of Social Factors on Incarceration Rates
 
 This file is the **human-readable mirror** of the [GitHub Projects (v2) Iterative Development board](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects) for this repo. Every row here is also a GitHub issue, added to the board, tagged with a milestone label, and sized.
 
@@ -90,7 +90,7 @@ This file is the **human-readable mirror** of the [GitHub Projects (v2) Iterativ
 - **Tag:** `M2-data-summary`
 - **Size:** M
 - **GitHub issue:** [link](https://github.com/eskerani/prison-predictor-capstone/issues/7)
-
+ 
 ### PBI-008
 
 - **Title:** Write SVR pseudocode
@@ -123,3 +123,15 @@ This file is the **human-readable mirror** of the [GitHub Projects (v2) Iterativ
 - **Tag:** `M3-draft-poster`
 - **Size:** S
 - **GitHub issue:** [link](https://github.com/eskerani/prison-predictor-capstone/issues/10)
+
+### PBI-011 - PBI-015
+
+- **Title:** Clean individual datasets
+- **NOTE:** Each of these issues corresponds to one dataset and has been created as a sub-issue under PBI-007. All have the same create/observe/analyze triple. 
+- **Hypothesis:** tracking the progress of each dataset individually will make my life easier.
+- **Create:** follow the data cleaning plan to make changes to data as needed.
+- **Observe:** make sure everything looks good.
+- **Analyze:** pull preliminary metrics.
+- **Tag:** `M2-data-summary`
+- **Size:** S
+- **GitHub issue:** [PBI-011](https://github.com/eskerani/prison-predictor-capstone/issues/11) / [PBI-012](https://github.com/eskerani/prison-predictor-capstone/issues/12) / [PBI-013](https://github.com/eskerani/prison-predictor-capstone/issues/13) / [PBI-014](https://github.com/eskerani/prison-predictor-capstone/issues/14) / [PBI-015](https://github.com/eskerani/prison-predictor-capstone/issues/15)

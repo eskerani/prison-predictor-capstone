@@ -81,115 +81,121 @@ One subsection per class week. The owner team commits the new section **before e
 
 ## Week 6
 
-**Iteration ending:** <date>
+**Iteration ending:** 6/22
 **Milestone tag in focus:** `M2-data-summary`
 
 **Completed PBIs**
-- ...
+- Create ERD
+- Create data cleaning plan
+- Clean race, poverty, incarceration, and spending data
 
 **Stakeholder response log**
-- ...
+- NA (nothing submitted as of writing)
 
 **Plan for next iteration**
-- ...
+- Finish cleaning crime data/pulling stats and get to work on data summary
 
 **Risks and impediments**
-- ...
+- A couple unexpected issues came up while data cleaning that will for sure have to be noted in the final project!
 
 ## Week 7 -- Data summary milestone (M2)
 
-**Iteration ending:** <date>
+**Iteration ending:** 6/29
 **Milestone tag in focus:** `M2-data-summary`
 
 **Completed PBIs**
-- ...
+- Clean crime data
 
 **Stakeholder response log**
-- ...
+- Clarified some points in the project proposal. 
 
 **Plan for next iteration**
-- ...
+- Finalize combined dataframe, finish data summary
 
 **Risks and impediments**
-- ...
+- There are some weird things happening with the data but I think it will simply be fine!
 
 **Retrospective (milestone boundary)**
-- What worked: ...
-- What did not: ...
-- One change for next iteration: ...
+- What worked: Having the cleaning plan has been super helpful to refer back to!
+- What did not: Some PBIs will likely be too big and need to be broken down into subtasks.
+- One change for next iteration: Break down PBIs
 
 ## Week 8
 
-**Iteration ending:** <date>
+**Iteration ending:** 7/6
 **Milestone tag in focus:** `M3-poster-draft`
 
 **Completed PBIs**
-- ...
+- Clean data
+- Prepare data for SVR application
+- Write SVR pseudocode
 
 **Stakeholder response log**
-- ...
+- NA
 
 **Plan for next iteration**
-- ...
+- Work on draft poster!
 
 **Risks and impediments**
-- ...
+- Getting some unexpected results with SVR? So will be looking into that more
 
 ## Week 9
 
-**Iteration ending:** <date>
+**Iteration ending:** 7/13
 **Milestone tag in focus:** `M3-poster-draft`
 
 **Completed PBIs**
-- ...
+- Run SVR (mostly)
 
 **Stakeholder response log**
-- ...
+- NA
 
 **Plan for next iteration**
-- ...
+- Start visualizing and interpreting SVR outputs
+- Work on poster draft
 
 **Risks and impediments**
-- ...
+- None!
 
 ## Week 10 -- Poster rough-draft milestone (M3)
 
-**Iteration ending:** <date>
+**Iteration ending:** 7/20
 **Milestone tag in focus:** `M3-poster-draft`
 
 **Completed PBIs**
-- ...
+- Draft visualizations
 
 **Stakeholder response log**
-- ...
+- NA
 
 **Plan for next iteration**
-- ...
+- Work on writeup draft
 
 **Risks and impediments**
-- ...
+- NA
 
 **Retrospective (milestone boundary)**
-- What worked: ...
-- What did not: ...
-- One change for next iteration: ...
+- What worked: It was definitely good to be able to use the other milestones as a foundation for creating the poster draft.
+- What did not: I would love to give myself more time to work on the writeup, especially since it's more substantial.
+- One change for next iteration: Plan ahead for the writing part more!
 
 ## Week 11
 
-**Iteration ending:** <date>
+**Iteration ending:** 7/27
 **Milestone tag in focus:** `M4-writeup-draft`
 
 **Completed PBIs**
-- ...
+- None
 
 **Stakeholder response log**
-- ...
+- NA
 
 **Plan for next iteration**
-- ...
+- Finish draft writeup
+- Clean up poster draft, get ready to present
 
 **Risks and impediments**
-- ...
+- I haven't been able to get both R and Python running in the same script yet :(
 
 ## Week 12 -- Write-up rough-draft milestone (M4)
 
