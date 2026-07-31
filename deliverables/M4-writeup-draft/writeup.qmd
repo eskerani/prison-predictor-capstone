@@ -48,16 +48,12 @@ execute:
 
 # Introduction: Problem and Research Questions
 
-<!-- Paste and revise from M1 proposal Section 2. Note any changes since M1. -->
-
 **Problem statement:** The United States prison system currently holds nearly 2 million people, and for decades has imprisoned its inhabitants at one of the highest rates in the world (Lurigio, 2024). A variety of legal factors, including mandatory minimum sentences and “three strikes” laws, have contributed to the unprecedented rise in incarceration in the US since the 1970s and 80s (DeFina and Hannon, 2013; Lurigio, 2024). The US incarceration rate has since levelled off, remaining relatively steady since the 2010s; however, this does not reflect the nation’s crime rate, which has fallen since peaking in in the 1990s (Pettit and Gutierrez, 2013). Given that the US’s criminal legal system wields tremendous power—power that is most often turned against already disadvantaged individuals and their communities—it is important that we recognize protective and risk factors for incarceration, many of which are social in nature (Lurigio, 2024; Henry, 2020; Pettit and Gutierrez, 2013). This project seeks to interrogate the dominant narrative that crime is the primary cause of incarceration by examining three other risk factors. 
 
 
 **Primary research question:** How do the predictive power of social factors (such as poverty, race, or government spending on police) compare to that of violent and property crime rates when using support vector regression to model the national incarceration rate?
 
-**Secondary questions (if any):** If crime is in fact the best predictor of incarceration rates, which social factor is the best predictor of crime rates?
-
-**Changes since M1 proposal:** None yet
+**Changes since M1 proposal:** Given findings that crime rates were *not* the best predictor of incarceration, the secondary research question in M1 has been dropped.
 
 # Impact and Stakeholders
 
@@ -67,23 +63,38 @@ My shared theme is social justice and identity-driven disparity analysis. As oth
 
 # Related Work and Background
 
-<!-- Brief cited context. Example: -->
+For decades, data science and statistics have played a massively important role in prison reform and abolition causes; as just one example, we have known for well over three decades that the population of Black prisoners is disproportionate to the Black population in the US [1]. Data concerning overall prison populations have also been key in tracking the effects of legislation concerning crime and sentencing, many of which contributed to astronomical growth of the US prison population [2]. Police spending is another facet of prior research, particularly when it comes to questions of how to effectively and durably address crime—while increased policing may reduce crime in the short term, studies suggest that diverting money from policing into social services more reliably reduces crime in the long term [3].
 
-Wildfire smoke and respiratory health are well studied at regional scale [@reid2016; @liu2016]. This project applies county-level public data to Oregon specifically.
+To this point, most of the work applying machine learning algorithms to data concerning the prison system has focused on predicting or classifying individual behaviors or risk factors. This project takes a more abstracted view of the legal system and its contributing factors as a whole.
 
 # Data and Data Engineering
 
-<!-- Paste from M1 Sections 4 and 5; update with actual pipeline state after M2. -->
+Given the historical nature of this project, all data sets were ingested as one-time .csv or .xlsx downloads. 
+
+Because this is historical data, all data sets will be ingested as either .csv or .xlsx files via one-time download, depending on which format is available. Data will be stored in the project repo on Github (outlined below), and as processing progresses updated versions of each dataset will be uploaded to the interim or processed folders as necessary.
+
+The current structure of the project’s data folder, based on Professor Cordova’s template, is:
+../data/raw: contains all original one-time data downloads (incarceration, crime, and poverty)
+Note: The raw IPUMS CPS data will not be present in this folder, as it can be read directly into R using an IPUMS package and when converted into a csv is too large to be stored in Github.
+../data/raw/spending: contains all the raw files that will be used to construct a full police spending dataset
+../data/interim: will hold the individual datasets once they have each been cleaned (filtered, aggregated, and/or used to calculate per capita values as needed)
+../data/processed: will contain the final dataset for use with SVR, consisting of the relevant columns from each cleaned dataset combined into one file. 
+
+
 
 **Sources:**
 
 | Source | Role | Access |
 |--------|------|--------|
-| | | |
+| Corrections Statistical Analysis Tool | Incarceration counts | One-time download |
+| FBI Summary Reporting System | Crime counts | One-time download |
+| Census Bureau via Urban Institute | Police spending data | One-time download |
+| Census Bureau | Historical poverty data | One-time download | 
+| IPUMS CPS | Race survey data | One-time download |
 
 **Engineering summary:** Raw data in `data/raw/`; processed panel in `data/processed/`; ingest scripts in `src/ingest/`.
 
-```{r}
+```{}
 #| label: tbl-data-qc
 #| tbl-cap: "Example QC summary (replace with your panel)"
 #| echo: true
@@ -99,26 +110,22 @@ knitr::kable(data.frame(
 
 # Ethics and Responsible Use
 
-<!-- Paste from M1 Section 8; expand with project-specific limits. -->
-
-- **Privacy:**
-- **Fairness / equity:**
-- **Limitations of setting:**
-- **Non-causal framing:** *(if observational)*
+- **Privacy:** Four out of the five datasets incorporated in this project were already highly aggregated to the state and year level. Data from the IPUMS CPS was downloaded at the original survey granularity (from which identifying household characteristics had been removed) and aggregated up to the state/year level. Thus, because these data represent a high-level overview, they pose very little risk to individuals. 
+- **Fairness / equity:** 
+- **Limitations of setting:** The data used in this project come with several specific caveats attached. Police spending data was missing for all states in 2001 and 2003 through the Urban Institute; since the rise in police spending over the years is generally fairly steady, these values were imputed by averaging the spending in the years directly before and after years with missing data (which allowed the preservation of trends by state). For two years (2013 and 2017) of poverty data, there were two estimated counts published for both population and poverty levels due to new measures being introduced in the survey. The new measures were given to only a proportion of the population, but because in theory both versions were estimating the same thing the values were combined by averaging. Regarding the Summary Reporting System's crime data, a number of states were unable to provide complete data for various years. Where this happened, the FBI generated estimates by either extrapolating using a portion of the year's data, or applying regional trends to a state's most recent year of complete data. Additionally, several states have changed their reporting practices over time, which means that newer numbers may not be directly comparable to those collected previously. 
+- **Non-causal framing:** This project only examines the associations between variables and thus no conclusions should be made about whether or not any of the predictive factors used *cause* incarceration. Further, these data and the features used are by nature interconnected; some of the features used to generate predictions may have impacted others (such as police spending and crime rates). Single-variable models in particular should thus be taken with a grain of salt as it is impossible to truly isolate any variable.
 
 # Methods and Evaluation
 
-<!-- Paste from M1 Section 6; tighten once analysis is fixed. -->
+**Design:** This project uses support vector regression (SVR), chosen because of its ability to deal with complex, non-linear data while remaining more straightforward than methods such as XGBoost. Default parameters were used for all models to ensure that each variable was treated the same way. Five single-variable models were trained, each using data from only one predictive factor to ensure that no other data affected predictions; in addition, one model was trained using all predictive factors as inputs in order to evaluate the importance of each factor when combined.
 
-**Design:**
+**Primary analysis:** 
 
-**Primary analysis:**
+**Evaluation metrics:** Three main evaluation metrics are used: correlation coefficient, r2 score, and root mean squared error (RMSE). The correlation coefficient is used as a preliminary evaluation of the linearity of relationships between variables, with the expectation that none will be particularly linear. r2 score is used to evaluate how much of the variance in incarceration rate can be explained by each model, while the RMSE measures the average error across predictions. Additionally, permutation importance and SHAP values are used to determine the most influential feature of the final multi-variate model. 
 
-**Evaluation metrics:**
+**Train / validation / holdout:** An 80-20 split was used to create training and testing datasets for use with models. This split was stratified by year to ensure that models were trained on a portion of the data from each year; the result was that a randomly selected 40 states in each year were used to train models (a total of 1,640 rows), while the remaining 10 states were used to generate predictions for a given year (totalling 410 rows). *Only* the relevant data (e.g. the feature and national incarceration rate in a single-variable model) were included in the training and testing data, so that models did not learn associations between year or state and incarceration rates.
 
-**Train / validation / holdout:**
-
-```{r}
+```{}
 #| label: fig-methods-placeholder
 #| fig-cap: "Replace with a methods diagram or exploratory plot"
 #| echo: false
@@ -131,7 +138,16 @@ text(1, 1, "Replace after M2/M3")
 
 # Results and Visualizations
 
-<!-- Fill after M2 data summary and M3 poster figures. -->
+As expected, none of the features were linearly correlated with state incarceration rates; all had a “weak” correlation coefficient of less than 0.5. When using single features (i.e. only police spending) as predictors of the national incarceration rate, the models generated performed poorly: only two features (police spending at 89.01 and property crime rate at 94.41) had RMSEs of less than 100 people per 100k; additionally, the r2 scores (none above 0.3) indicate that no individual feature was able to explain the variance in the national incarceration rate particularly well. However, out of these poor models, the one trained on police spending rates had the best RMSE and r2 scores. 
+
+[![Line plot displaying model predictions of the national incarceration rate over time using only police spending (in dotted green) and all features (in dashed orange) as inputs.](./writeup_files/figure-html/all_graph.png)](./writeup_files/figure-html/all_graph.png)
+
+A model trained on all features performed markedly better, with an RMSE of 53.65 and an r2 score of 0.74. Relative to all other features, police spending rate was the most most important in generating this model’s predictions with a permutation importance of 0.16, which shows that the model’s performance suffered the most when police spending data was shuffled. 
+
+
+[![Table containing all model results, with best results highlighted in dark blue](./writeup_files/figure-html/poster_table.png)](./writeup_files/figure-html/poster_table.png)
+
+
 
 *(Stub: key findings with @fig-methods-placeholder and tables.)*
 
@@ -139,9 +155,11 @@ text(1, 1, "Replace after M2/M3")
 
 **Interpretation:**
 
-**Limitations:** *(tie to actual data and design)*
+**Limitations:** One of the chief limitations of this work lies in the fact that much of the data used were estimates. The data sources used to calculate race and poverty rates were both surveys, and while both aim to provide representative information about the US population, they should not be taken as the definitive truth. Similarly, the data on crime counts was based only on *reports or arrests made*, which very likely results in undercounting; out of all reports, only seven crimes are accounted for in the FBI's Summary Reporting System (homicide, rape, robbery, aggravated assault, burglary, larceny, and motor vehicle theft), narrowing the pool even further. 
 
-**Future work:**
+from website: In short, crime reported through the SRS only accounted for the most serious offense that occurred in an incident. Therefore, all data for lesser crimes in that incident was, by SRS rule, not reported. Because of this, UCR crime data for the country was not comprehensive. 
+
+**Future work:** 
 
 # Conclusions and Recommendations
 
