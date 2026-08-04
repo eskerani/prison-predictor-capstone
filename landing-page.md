@@ -18,16 +18,28 @@ Raw data is contained in the `raw` folder; preliminary findings/EDA are in the `
 The visualizations used on the poster are reproduced here, in case you would like a closer look:
 
 <img width="1176" height="1176" alt="capstone data sketch drawio" src="https://github.com/user-attachments/assets/b52e4b0b-382d-4c7d-b6f5-d2ccd428b37c" />
+
 *Figure 1: A diagram of the pipeline used for this project, from ingestion to modeling*
 
+---
+
 <img width="1844" height="1499" alt="all_graph" src="https://github.com/user-attachments/assets/4c8df799-35ff-41c1-86ee-3b2364cfc189" />
+
 *Figure 2: A time series graph displaying the national incarceration rate compared to SVR predictions based on police spending data only (green dotted) and all features (orange dashed)*
 
+---
+
 <img width="2249" height="1500" alt="rmse_graph" src="https://github.com/user-attachments/assets/e2a6c868-657c-4c62-a9d2-e84bb873e1e0" />
+
 *Figure 3: A bar plot depicting the RMSEs of all models for comparison*
 
+---
+
 <img width="2230" height="933" alt="poster_table" src="https://github.com/user-attachments/assets/418f9e6c-f55b-4e35-b8ab-0af392fa2999" />
+
 *Table 1: A table displaying the results and stats for all models/variables. The best results are highlighted in darker purple, with worse results in lighter shades*
+
+---
 
 ### Full data citations
 1. Bureau of Justice Statistics. Corrections Statistical Analysis Tool [dataset]. n.d. https://csat.bjs.ojp.gov/advanced-query
