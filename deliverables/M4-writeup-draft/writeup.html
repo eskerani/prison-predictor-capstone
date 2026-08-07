@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Emery Kerani">
-<meta name="dcterms.date" content="2026-07-31">
+<meta name="dcterms.date" content="2026-08-07">
 
 <title>Crime and What Else?</title>
 <style>
@@ -61,6 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -117,7 +118,7 @@ div.csl-indent {
   <li><a href="#reproducibility-and-references" id="toc-reproducibility-and-references" class="nav-link" data-scroll-target="#reproducibility-and-references"><span class="header-section-number">12</span> Reproducibility and References</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">13</span> References</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="..\..\..\writeup.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="writeup.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -141,7 +142,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 31, 2026</p>
+      <p class="date">August 7, 2026</p>
     </div>
   </div>
   
@@ -153,16 +154,6 @@ div.csl-indent {
 </header>
 
 
-<!--
-  DATA 510 write-up skeleton (Week 5 Quarto lecture).
-
-  Copy this file to your DS3 repo:
-    deliverables/M4-writeup-draft/writeup.qmd
-
-  Week 5: paste prose from your M1 proposal into Introduction, Data, Ethics, Methods.
-  Week 7+: replace stubs with real results from notebooks/ and src/.
-  Week 12 (M4): methods and findings should be stable; render PDF + HTML for submission.
--->
 <section id="title-team-and-affiliations" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Title, Team, and Affiliations</h1>
 <p><strong>Project title:</strong> <em>Crime and What Else? Investigating the Predictive Power of Social Factors on Incarceration Rates</em></p>
@@ -187,27 +178,27 @@ div.csl-indent {
 </section>
 <section id="abstract" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Abstract</h1>
-<p><em>(150 to 250 words after you have results. Summarize: problem, approach, key finding, impact, limitation. Write this section last.)</em></p>
+<p>Crime is often taken for granted as the primary driver of incarceration in the United States, without accounting for underlying factors (e.g.&nbsp;poverty) or large-scale policies that have expanded the prison-industrial complex to an unprecedented level. This project aims to evaluate the truth of this dominant narrative by utilizing machine learning to assess how well a variety of factors are able to predict incarceration rates. Among both single-feature models and a model using all features to generate predictions, police spending had the lowest error rate and highest feature importance, indicating that government spending on police is more closely associated with incarceration rates than crime.</p>
 </section>
 <section id="introduction-problem-and-research-questions" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Introduction: Problem and Research Questions</h1>
-<p><strong>Problem statement:</strong> The United States prison system currently holds nearly 2 million people, and for decades has imprisoned its inhabitants at one of the highest rates in the world (Lurigio, 2024). A variety of legal factors, including mandatory minimum sentences and “three strikes” laws, have contributed to the unprecedented rise in incarceration in the US since the 1970s and 80s (DeFina and Hannon, 2013; Lurigio, 2024). The US incarceration rate has since levelled off, remaining relatively steady since the 2010s; however, this does not reflect the nation’s crime rate, which has fallen since peaking in in the 1990s (Pettit and Gutierrez, 2013). Given that the US’s criminal legal system wields tremendous power—power that is most often turned against already disadvantaged individuals and their communities—it is important that we recognize protective and risk factors for incarceration, many of which are social in nature (Lurigio, 2024; Henry, 2020; Pettit and Gutierrez, 2013). This project seeks to interrogate the dominant narrative that crime is the primary cause of incarceration by examining three other risk factors.</p>
+<p><strong>Problem statement:</strong> The United States prison system currently holds nearly 2 million people, and for decades has imprisoned its inhabitants at one of the highest rates in the world <span class="citation" data-cites="lurigio2024">(<a href="#ref-lurigio2024" role="doc-biblioref">Lurigio, 2024</a>)</span>. A variety of legal factors, including mandatory minimum sentences and “three strikes” laws, have contributed to the unprecedented rise in incarceration in the US since the 1970s and 80s <span class="citation" data-cites="defina2013 lurigio2024">(<a href="#ref-defina2013" role="doc-biblioref">DeFina &amp; Hannon, 2009</a>; <a href="#ref-lurigio2024" role="doc-biblioref">Lurigio, 2024</a>)</span>. The US incarceration rate has since levelled off, remaining relatively steady since the 2010s; however, this does not reflect the nation’s crime rate, which has fallen since peaking in in the 1990s <span class="citation" data-cites="pettit2018">(<a href="#ref-pettit2018" role="doc-biblioref">Pettit &amp; Gutierrez, 2018</a>)</span>. Given that the US’s criminal legal system wields tremendous power—power that is most often turned against already disadvantaged individuals and their communities—it is important that we recognize protective and risk factors for incarceration, many of which are social in nature <span class="citation" data-cites="lurigio2024 henry2020 pettit2018">(<a href="#ref-henry2020" role="doc-biblioref">Henry, 2020</a>; <a href="#ref-lurigio2024" role="doc-biblioref">Lurigio, 2024</a>; <a href="#ref-pettit2018" role="doc-biblioref">Pettit &amp; Gutierrez, 2018</a>)</span>. This project seeks to interrogate the dominant narrative that crime is the primary cause of incarceration by examining three other risk factors.</p>
 <p><strong>Primary research question:</strong> How do the predictive power of social factors (such as poverty, race, or government spending on police) compare to that of violent and property crime rates when using support vector regression to model the national incarceration rate?</p>
 <p><strong>Changes since M1 proposal:</strong> Given findings that crime rates were <em>not</em> the best predictor of incarceration, the secondary research question in M1 has been dropped.</p>
 </section>
 <section id="impact-and-stakeholders" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Impact and Stakeholders</h1>
-<p>The key stakeholders in this work are those who are most often targeted by criminalization and incarceration, primarily poor and BIPOC folks (Pettit and Gutierrez, 2013). Additionally, communities across the country are continually harmed by increasing incarceration rates, as incarceration has been shown to negatively impact both community health (Wildeman and Wang, 2017) and poverty (DeFina and Hannon, 2013). By critically examining the circumstances that can contribute to incarceration, this project seeks to uplift the work of organizations such as Transformative Justice Community and the Oregon Justice Resource Center, which advocate for solutions to harm that shift our paradigm away from imprisonment.</p>
+<p>The key stakeholders in this work are those who are most often targeted by criminalization and incarceration, primarily poor and BIPOC folks <span class="citation" data-cites="pettit2018">(<a href="#ref-pettit2018" role="doc-biblioref">Pettit &amp; Gutierrez, 2018</a>)</span>. Additionally, communities across the country are continually harmed by increasing incarceration rates, as incarceration has been shown to negatively impact both community health and poverty <span class="citation" data-cites="defina2013 wildeman2017">(<a href="#ref-defina2013" role="doc-biblioref">DeFina &amp; Hannon, 2009</a>; <a href="#ref-wildeman2017" role="doc-biblioref">Wildeman &amp; Wang, 2017</a>)</span>. By critically examining the circumstances that can contribute to incarceration, this project seeks to uplift the work of organizations such as Transformative Justice Community and the Oregon Justice Resource Center, which advocate for solutions to harm that shift our paradigm away from imprisonment.</p>
 <p>My shared theme is social justice and identity-driven disparity analysis. As others who are interested in social justice but perhaps not as familiar with the prison-industrial complex as I am, I hope that they’ll point out anywhere I make assumptions/lack context and help ensure that my project doesn’t steer anyone toward misinformed conclusions.</p>
 </section>
 <section id="related-work-and-background" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Related Work and Background</h1>
-<p>For decades, data science and statistics have played a massively important role in prison reform and abolition causes; as just one example, we have known for well over three decades that the population of Black prisoners is disproportionate to the Black population in the US [1]. Data concerning overall prison populations have also been key in tracking the effects of legislation concerning crime and sentencing, many of which contributed to astronomical growth of the US prison population [2]. Police spending is another facet of prior research, particularly when it comes to questions of how to effectively and durably address crime—while increased policing may reduce crime in the short term, studies suggest that diverting money from policing into social services more reliably reduces crime in the long term [3].</p>
+<p>For decades, data science and statistics have played a massively important role in prison reform and abolition causes; as just one example, we have known for well over three decades that the population of Black prisoners is disproportionate to the Black population in the US <span class="citation" data-cites="tonry1994">(<a href="#ref-tonry1994" role="doc-biblioref">Tonry, 1994</a>)</span>. Data concerning overall prison populations have also been key in tracking the effects of legislation concerning crime and sentencing, many of which contributed to astronomical growth of the US prison population <span class="citation" data-cites="mauer2001">(<a href="#ref-mauer2001" role="doc-biblioref">Mauer, 2001</a>)</span>. Police spending is another facet of prior research, particularly when it comes to questions of how to effectively and durably address crime—while increased policing may reduce crime in the short term, studies suggest that diverting money from policing into social services more reliably reduces crime in the long term <span class="citation" data-cites="beck2025">(<a href="#ref-beck2025" role="doc-biblioref">Beck, 2025</a>)</span>.</p>
 <p>To this point, most of the work applying machine learning algorithms to data concerning the prison system has focused on predicting or classifying individual behaviors or risk factors. This project takes a more abstracted view of the legal system and its contributing factors as a whole.</p>
 </section>
 <section id="data-and-data-engineering" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Data and Data Engineering</h1>
-<p>This project combines data from five sources, all of which are at the state level and contain information for the years 1980-2020. Data about the incarcerated population of each state (excluding federal prisoners) was obtained from the Bureau of Justice Statistics’ Corrections Statistical Analysis Tool; crime data was downloaded from the FBI’s Summary Reporting System; data on police spending was collected by the Census Bureau and made available for download by the Urban Institute’s State and Local Finance Data tool; poverty data was collected by the Census Bureau and included the population of each state; and race data was estimated based on demographic information included in the IPUMS Current Population Survey (CPS). Given the historical nature of this project, all data sets were ingested as one-time .csv or .xlsx downloads.</p>
+<p>This project combines data from five sources, all of which are at the state level and contain information for the years 1980-2020. Data about the incarcerated population of each state (excluding federal prisoners) was obtained from the Bureau of Justice Statistics’ Corrections Statistical Analysis Tool; crime data was downloaded from the FBI’s Summary Reporting System (SRS); data on police spending was collected by the Census Bureau and made available for download by the Urban Institute’s State and Local Finance Data tool; poverty data was collected by the Census Bureau and included the population of each state; and race data was estimated based on demographic information included in the IPUMS Current Population Survey (CPS). Given the historical nature of this project, all data sets were ingested as one-time .csv or .xlsx downloads.</p>
 <p>Once downloaded, the datasets were individually cleaned and wrangled into a standardized format. The IPUMS data was aggregated up to the state and year level, at which point the datasets could be joined together using state and year as the key. Using these combined data, all features were standardized by population (per 100k) based on the population estimates originally included in the poverty dataset. The resulting combined dataset contained 2,050 rows and 10 columns: state, year, total population, incarceration rate, total crime rate, violent crime rate, property crime rate, poverty rate, the rate of non-white residents, and police spending rate.</p>
 <p><strong>Sources:</strong></p>
 <table class="caption-top table">
@@ -251,7 +242,7 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<p><strong>Engineering summary:</strong> Raw data in <code>data/raw/</code>; processed panel in <code>data/processed/</code>; ingest scripts in <code>src/ingest/</code>.</p>
+<p><strong>Engineering summary:</strong> Raw data in <code>data/raw/</code>; processed panel in <code>data/processed/</code>; cleaning script in <code>data/processed/data_cleaning.qmd</code>.</p>
 <pre><code>#| label: tbl-data-qc
 #| tbl-cap: "Example QC summary (replace with your panel)"
 #| echo: true
@@ -267,16 +258,15 @@ knitr::kable(data.frame(
 <section id="ethics-and-responsible-use" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> Ethics and Responsible Use</h1>
 <ul>
-<li><strong>Privacy:</strong> Four out of the five datasets incorporated in this project were already highly aggregated to the state and year level. Data from the IPUMS CPS was downloaded at the original survey granularity (from which identifying household characteristics had been removed) and aggregated up to the state/year level. Thus, because these data represent a high-level overview, they pose very little risk to individuals.</li>
-<li><strong>Fairness / equity:</strong></li>
-<li><strong>Limitations of setting:</strong> The data used in this project come with several specific caveats attached. Police spending data was missing for all states in 2001 and 2003 through the Urban Institute; since the rise in police spending over the years is generally fairly steady, these values were imputed by averaging the spending in the years directly before and after years with missing data (which allowed the preservation of trends by state). For two years (2013 and 2017) of poverty data, there were two estimated counts published for both population and poverty levels due to new measures being introduced in the survey. The new measures were given to only a proportion of the population, but because in theory both versions were estimating the same thing the values were combined by averaging. Regarding the Summary Reporting System’s crime data, a number of states were unable to provide complete data for various years. Where this happened, the FBI generated estimates by either extrapolating using a portion of the year’s data, or applying regional trends to a state’s most recent year of complete data. Additionally, several states have changed their reporting practices over time, which means that newer numbers may not be directly comparable to those collected previously.</li>
-<li><strong>Non-causal framing:</strong> This project only examines the associations between variables and thus no conclusions should be made about whether or not any of the predictive factors used <em>cause</em> incarceration. Further, these data and the features used are by nature interconnected; some of the features used to generate predictions may have impacted others (such as police spending and crime rates). Single-variable models in particular should thus be taken with a grain of salt as it is impossible to truly isolate any variable.</li>
+<li><p><strong>Privacy:</strong> Four out of the five datasets incorporated in this project were already highly aggregated to the state and year level. Data from the IPUMS CPS was downloaded at the original survey granularity (from which identifying household characteristics had been removed) and aggregated up to the state/year level. Thus, because these data represent a high-level overview, they pose very little risk to individuals.</p></li>
+<li><p><strong>Fairness / equity:</strong> Where associations are found between social factors such as race or poverty and incarceration, the data must not be interpreted as these factors being indicators of criminality. For example, though it has been demonstrated that Black people are disproportionately imprisoned in the US, this is due to overpolicing and systemic oppression and <em>not</em> because of any inherent association between Blackness and criminality. Under no circumstances should this project be used to justify further policing or incarceration of marginalized communities.</p></li>
+<li><p><strong>Limitations of setting:</strong> The data used in this project come with several specific caveats attached. Police spending data was missing for all states in 2001 and 2003 through the Urban Institute; since the rise in police spending over the years is generally fairly steady, these values were imputed by averaging the spending in the years directly before and after years with missing data (which allowed the preservation of trends by state). For two years (2013 and 2017) of poverty data, there were two estimated counts published for both population and poverty levels due to new measures being introduced in the survey. The new measures were given to only a proportion of the population, but because in theory both versions were estimating the same thing the values were combined by averaging. Regarding the Summary Reporting System’s crime data, a number of states were unable to provide complete data for various years. Where this happened, the FBI generated estimates by either extrapolating using a portion of the year’s data, or applying regional trends to a state’s most recent year of complete data. Additionally, several states have changed their reporting practices over time, which means that newer numbers may not be directly comparable to those collected previously. Finally, the SRS only collected information about the most serious offense that occurred in a given incident (e.g.&nbsp;if a homicide occurred in the course of a motor vehicle theft, only the homicide would be recorded), meaning that these data give us a clearer picture of the number of incidents that occurred rather than the actual total number of crimes.</p></li>
+<li><p><strong>Non-causal framing:</strong> This project only examines the associations between variables and thus no conclusions should be made about whether or not any of the predictive factors used <em>cause</em> incarceration. Further, these data and the features used are by nature interconnected; some of the features used to generate predictions may have impacted others (such as police spending and crime rates). Single-variable models in particular should thus be taken with a grain of salt as it is impossible to truly isolate any variable.</p></li>
 </ul>
 </section>
 <section id="methods-and-evaluation" class="level1" data-number="8">
 <h1 data-number="8"><span class="header-section-number">8</span> Methods and Evaluation</h1>
 <p><strong>Design:</strong> This project uses support vector regression (SVR), chosen because of its ability to deal with complex, non-linear data while remaining more straightforward than methods such as XGBoost. Default parameters were used for all models to ensure that each variable was treated the same way. Five single-variable models were trained, each using data from only one predictive factor to ensure that no other data affected predictions; in addition, one model was trained using all predictive factors as inputs in order to evaluate the importance of each factor when combined.</p>
-<p><strong>Primary analysis:</strong></p>
 <p><strong>Evaluation metrics:</strong> Three main evaluation metrics are used: correlation coefficient, r2 score, and root mean squared error (RMSE). The correlation coefficient is used as a preliminary evaluation of the linearity of relationships between variables, with the expectation that none will be particularly linear. r2 score is used to evaluate how much of the variance in incarceration rate can be explained by each model, while the RMSE measures the average error across predictions. Additionally, permutation importance and SHAP values are used to determine the most influential feature of the final multi-variate model.</p>
 <p><strong>Train / validation / holdout:</strong> An 80-20 split was used to create training and testing datasets for use with models. This split was stratified by year to ensure that models were trained on a portion of the data from each year; the result was that a randomly selected 40 states in each year were used to train models (a total of 1,640 rows), while the remaining 10 states were used to generate predictions for a given year (totalling 410 rows). <em>Only</em> the relevant data (e.g.&nbsp;the feature and national incarceration rate in a single-variable model) were included in the training and testing data, so that models did not learn associations between year or state and incarceration rates. Additionally, all features were scaled using a robust scaler before training and testing, to eliminate any bias that could by caused by size differences in the variables. The models’ predictions were also scaled accordingly, but were unscaled before calculating evaluation metrics to aid interpretibility.</p>
 <pre><code>#| label: fig-methods-placeholder
@@ -304,17 +294,17 @@ text(1, 1, "Replace after M2/M3")</code></pre>
 <figcaption>Table containing all model results, with best results highlighted in dark blue.</figcaption>
 </figure>
 </div>
+<p>Of the decades included in analysis, the multi-variable model generated the best predictions for 2000 onwward (with RMSEs of 30.41 and 33.5 for the 2000s and 2010s, respectively) and performed markedly worse on data from the 1980s (which had an RMSE of 74.48) and 90s (RMSE of 60.51). With respect to geography, the model’s accuracy varied widely: the East South Central, West North Central, Pacific, and South Atlantic census regions all had RMSEs of under 50, while other regions ranged from 50 to 71.53. However, it must be noted that predictions were not generated based on even numbers of instances of states from each region in the testing data; due to stratification by year when creating the train-test split, the state distributions were shuffled and thus regional appearences in testing data vary widely from 27-93.</p>
 </section>
 <section id="discussion-limitations-and-future-work" class="level1" data-number="10">
 <h1 data-number="10"><span class="header-section-number">10</span> Discussion, Limitations, and Future Work</h1>
 <p><strong>Interpretation:</strong> The results above indicate that across the board, police spending rate serves as the best (or most important) predictor for national incarceration rate using SVR models. In all evaluation metrics, property crime rates were a close second, meaning that where crime was associated with incarceration rates in this project it was primarily property crime and not violent crime. Additionally, the performance difference between single-feature and combined-feature models confirms that none of these variables truly exist in isolation, and all must be accounted for in order to build a fuller picture of what might influence incarceration in the United States.</p>
-<p><strong>Limitations:</strong> One of the chief limitations of this work lies in the fact that much of the data used were estimates. The data sources used to calculate race and poverty rates were both surveys, and while both aim to provide representative information about the US population, they should not be taken as the definitive truth. Similarly, the data on crime counts was based only on <em>reports or arrests made</em>, which very likely results in undercounting; out of all reports, only seven crimes are accounted for in the FBI’s Summary Reporting System (homicide, rape, robbery, aggravated assault, burglary, larceny, and motor vehicle theft), narrowing the pool even further.</p>
-<p>from website: In short, crime reported through the SRS only accounted for the most serious offense that occurred in an incident. Therefore, all data for lesser crimes in that incident was, by SRS rule, not reported. Because of this, UCR crime data for the country was not comprehensive.</p>
+<p><strong>Limitations:</strong> One of the chief limitations of this work lies in the fact that much of the data used were estimates. The data sources used to calculate race and poverty rates were both surveys, and while both aim to provide representative information about the US population, they should not be taken as the definitive truth. Similarly, the data on crime counts was based only on <em>reports or arrests made</em>, which very likely results in undercounting; out of all reports, only seven crimes are accounted for in the FBI’s Summary Reporting System (homicide, rape, robbery, aggravated assault, burglary, larceny, and motor vehicle theft), narrowing the pool even further. Additionally, as noted previously, this study was purely observational; no causal claims can be made about the links between any of the variables explored and incarceration. Rather, the goal of this project is to note associations between variables.</p>
 <p><strong>Future work:</strong> Future work could explore variations in the type of incarceration (e.g.&nbsp;jails vs.&nbsp;prisons, men vs.&nbsp;women) or concentrate on smaller geographical areas such as counties to incorporate more data.</p>
 </section>
 <section id="conclusions-and-recommendations" class="level1" data-number="11">
 <h1 data-number="11"><span class="header-section-number">11</span> Conclusions and Recommendations</h1>
-<p><em>(Short, stakeholder-facing takeaways.)</em></p>
+<p>Police spending served as the most influential predictor of national incarceration rates. Any efforts to reduce incarceration should keep police and legal system spending in mind as a factor when engineering reforms.</p>
 </section>
 <section id="reproducibility-and-references" class="level1" data-number="12">
 <h1 data-number="12"><span class="header-section-number">12</span> Reproducibility and References</h1>
@@ -326,8 +316,31 @@ text(1, 1, "Replace after M2/M3")</code></pre>
 </section>
 <section id="references" class="level1" data-number="13">
 <h1 data-number="13"><span class="header-section-number">13</span> References</h1>
-<div id="refs" role="list">
-
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-beck2025" class="csl-entry" role="listitem">
+Beck, B. (2025). Local government spending: Policing versus social services. <em>Annual Review of Criminology</em>, <em>8</em>, 505–528. <a href="https://doi.org/10.1146/annurev-criminol-111523-122639">https://doi.org/10.1146/annurev-criminol-111523-122639</a>
+</div>
+<div id="ref-defina2013" class="csl-entry" role="listitem">
+DeFina, R., &amp; Hannon, L. (2009). The impact of mass incarceration on poverty. <em>Crime &amp; Delinquency</em>, <em>59</em>(4), 562–586. <a href="https://doi.org/10.1177/0011128708328864">https://doi.org/10.1177/0011128708328864</a>
+</div>
+<div id="ref-henry2020" class="csl-entry" role="listitem">
+Henry, B. (2020). Adverse experiences, mental health, and substance use disorders as social determinants of incarceration. <em>Journal of Community Psychology</em>, <em>48</em>(3), 744–762. <a href="https://doi.org/10.1002/jcop.22289">https://doi.org/10.1002/jcop.22289</a>
+</div>
+<div id="ref-lurigio2024" class="csl-entry" role="listitem">
+Lurigio, A. J. (2024). The golden anniversary of mass incarceration in america. <em>The Prison Journal</em>, <em>104</em>(3), 271–295. <a href="https://doi.org/10.1177/00328855241240131">https://doi.org/10.1177/00328855241240131</a>
+</div>
+<div id="ref-mauer2001" class="csl-entry" role="listitem">
+Mauer, M. (2001). The causes and consequences of prison growth in the united states. <em>Punishment &amp; Society</em>, <em>3</em>(1), 9–20.
+</div>
+<div id="ref-pettit2018" class="csl-entry" role="listitem">
+Pettit, B., &amp; Gutierrez, C. (2018). Mass incarceration and racial inequality. <em>The American Journal of Economics and Sociology</em>, <em>77</em>(3–4), 1153–1182. <a href="https://doi.org/10.1111/ajes.12241">https://doi.org/10.1111/ajes.12241</a>
+</div>
+<div id="ref-tonry1994" class="csl-entry" role="listitem">
+Tonry, M. (1994). Racial disproportion in US prisons. <em>British Journal of Criminology</em>, <em>34</em>, 97–115.
+</div>
+<div id="ref-wildeman2017" class="csl-entry" role="listitem">
+Wildeman, C., &amp; Wang, E. A. (2017). Mass incarceration, public health, and widening inequality in the USA. <em>The Lancet</em>, <em>389</em>(10077), 1464–1474. <a href="https://doi.org/10.1016/S0140-6736(17)30259-3">https://doi.org/10.1016/S0140-6736(17)30259-3</a>
+</div>
 </div>
 <!-- Create refs.bib alongside this file. Example entries: -->
 <!--
