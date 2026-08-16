@@ -1,0 +1,575 @@
+---
+title: "Crime and What Else? Analysis Script"
+author: "Emery Kerani"
+format: 
+    html: default
+    pdf: default
+number-sections: true
+toc: true
+execute:
+    warning: false
+---
+
+## Initialization
+
+### Installations & Imports:
+
+Uncomment the code below if you are running this notebook for the first time, to ensure that all packages are installed and will work with the version of python that is running.
+
+```{python}
+# %pip install scikit-learn
+# %pip install pandas
+# %pip uninstall numpy
+# %pip install "numpy<2"
+# %pip install shap
+# %pip install matplotlib
+# %pip install seaborn
+# %pip install dataframe_image
+```
+
+```{python}
+from sklearn.metrics import r2_score, root_mean_squared_error
+from sklearn.svm import SVR
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.preprocessing import StandardScaler, RobustScaler
+from sklearn.linear_model import LinearRegression
+from sklearn.inspection import permutation_importance
+from matplotlib.colors import LinearSegmentedColormap
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+import dataframe_image as dfi
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly.express as px
+import shap
+```
+
+### EDA graph
+
+```{python}
+eda_df = pd.read_csv('all_data_combined.csv')
+
+eda_df = eda_df.drop(['Unnamed: 0', 'tot_pop', 'tot_crime_rate'], axis=1)
+eda_df = eda_df.rename(columns = {'incar_rate':'Incarceration Rate', 'violent_crime_rate': 'Violent Crime Rate', 'prop_crime_rate': 'Property Crime Rate', 'pov_rate': 'Poverty Rate', 'non_white_rate':'Non-White Rate', 'spending_rate': 'Police Spending Rate (1k$)'})
+
+eda_df['Police Spending Rate (1k$)'] = eda_df['Police Spending Rate (1k$)'].apply(lambda x: x / 1000)
+
+eda_df = pd.melt(eda_df, ['State', 'year'])
+
+eda_df
+
+g = sns.FacetGrid(eda_df, col = 'variable', col_wrap=3, sharey=False, margin_titles=True)
+g.map(sns.lineplot, 'year', 'value', color="#984fbd")
+g.set_titles(col_template="National {col_name}")
+g.set_axis_labels(x_var='Year', y_var='Value per 100k people')
+g.fig.subplots_adjust(top=0.9)
+g.fig.suptitle("Figure 1: The US's National Incarceration Rate is in a League of its Own")
+
+g.savefig('prison-predictor-capstone/deliverables/M5-final/figure-html/eda_graph.png', dpi=300)
+g
+
+g.fig.close()
+```
+
+### Pre-processing
+
+```{python}
+df = pd.read_csv('all_data_combined.csv')
+
+scaler = RobustScaler()
+
+df[['incar_rate', 'tot_crime_rate','violent_crime_rate','prop_crime_rate','pov_rate','non_white_rate','spending_rate']] = scaler.fit_transform(df[['incar_rate','tot_crime_rate','violent_crime_rate','prop_crime_rate','pov_rate','non_white_rate','spending_rate']])
+
+nat_dict = {}
+
+for row in df[df['State'] == 'National'].iterrows():
+    nat_dict[row[1]['year']] = row[1]['incar_rate']
+
+df['incar_rate_national'] = df['year'].apply(lambda x: nat_dict[x])
+
+df = df[df['State'] != 'National']
+```
+
+**Checking collinearity**
+
+*Unscaled:*
+
+```{python}
+vif_df = pd.read_csv('all_data_combined.csv')
+
+vif_df = vif_df[vif_df['State'] != 'National']
+
+vif = pd.DataFrame()
+vif["feature"] = vif_df[['violent_crime_rate','prop_crime_rate','spending_rate','pov_rate','non_white_rate']].columns
+
+vif['vif'] = [variance_inflation_factor(vif_df[['violent_crime_rate','prop_crime_rate','spending_rate','pov_rate','non_white_rate']].values, i)
+                          for i in range(len(vif_df[['violent_crime_rate','prop_crime_rate','spending_rate','pov_rate','non_white_rate']].columns))]
+
+vif
+```
+
+*After scaling:*
+
+```{python}
+vif = pd.DataFrame()
+vif["feature"] = df[['violent_crime_rate','prop_crime_rate','spending_rate','pov_rate','non_white_rate']].columns
+
+vif['vif'] = [variance_inflation_factor(df[['violent_crime_rate','prop_crime_rate','spending_rate','pov_rate','non_white_rate']].values, i)
+                          for i in range(len(df[['violent_crime_rate','prop_crime_rate','spending_rate','pov_rate','non_white_rate']].columns))]
+
+vif
+```
+
+## Baseline model
+
+```{python}
+df_one = pd.read_csv('all_data_combined.csv')
+
+df_one = df_one[df_one['State'] == 'National']
+
+linreg = LinearRegression()
+linreg.fit(df_one['year'].values.reshape(-1,1), df_one['incar_rate'].values.reshape(-1,1))
+
+lin_pred = linreg.predict(df_one['year'].values.reshape(-1,1))
+
+print('RMSE: ' + str(root_mean_squared_error(df_one['incar_rate'], lin_pred)))
+print('R2: ' + str(r2_score(df_one['incar_rate'], lin_pred)))
+```
+
+**Graph**
+
+```{python}
+axs = plt.gca()
+
+sns.lineplot(data=df_one, x='year', y='incar_rate', color='black',ax=axs, label='Actual')
+sns.regplot(data=df_one, x='year', y='incar_rate', scatter=False, line_kws={'color':'#1b9e77', 'linestyle':'dotted'},ax=axs,label='Linear model')
+
+plt.title('Figure 2: A Linear Model Rarely Gets the\nNational Incarceration Rate Right')
+plt.xlabel('Year')
+plt.ylabel('National Incarceration Rate (per 100k)')
+plt.legend()
+
+plt.savefig('prison-predictor-capstone/deliverables/M5-final/figure-html/linear_graph.png', dpi=300, bbox_inches='tight')
+plt.show()
+```
+
+## Single-feature SVR models
+
+```{python}
+svr_results = {}
+
+X_train, X_test, y_train, y_test = train_test_split(df[['State','year','tot_crime_rate','violent_crime_rate','prop_crime_rate','pov_rate','non_white_rate','spending_rate']], df['incar_rate_national'], train_size=0.8, random_state=16, stratify = df['year'])
+
+X_test_index = X_test.reset_index()
+
+factors = ['violent_crime_rate', 'prop_crime_rate', 'spending_rate','pov_rate', 'non_white_rate']
+
+all_predictions = pd.DataFrame({'year':X_test_index['year']}) 
+
+for factor in factors:
+
+    # uncomment code below for tuning
+    # params = {
+    # 'C': [0.1, 1, 10, 100],
+    # 'gamma': [0.01, 0.1, 1, 'scale'],
+    # 'epsilon': [0.01, 0.1, 0.5]
+    # }
+
+    # grid_search = GridSearchCV(SVR(kernel='rbf'), params, cv=5, scoring='neg_root_mean_squared_error')
+    # grid_search.fit(X_train[[factor]], y_train)
+
+    svr = SVR()
+
+    # svr = SVR(kernel='rbf', **grid_search.best_params_)
+
+    svr.fit(X_train[[factor]], y_train)
+    
+    y_pred = svr.predict(X_test[[factor]])
+
+    pred_df = pd.DataFrame(scaler.inverse_transform(pd.DataFrame({'incar_rate':y_pred,'tot_crime_rate':X_test['tot_crime_rate'], 'violent_crime_rate':X_test['violent_crime_rate'],
+                            'prop_crime_rate':X_test['prop_crime_rate'],'pov_rate':X_test['pov_rate'],'non_white_rate':X_test['non_white_rate'],
+                            'spending_rate':X_test['spending_rate']})))
+    
+    real_df = pd.DataFrame(scaler.inverse_transform(pd.DataFrame({'incar_rate':y_test,'tot_crime_rate':X_test['tot_crime_rate'], 'violent_crime_rate':X_test['violent_crime_rate'],
+                            'prop_crime_rate':X_test['prop_crime_rate'],'pov_rate':X_test['pov_rate'],'non_white_rate':X_test['non_white_rate'],
+                            'spending_rate':X_test['spending_rate']})))
+    
+    
+    y_pred = pred_df[[0]]
+    y_test_nonscaled = real_df[[0]]
+    
+    r2 = r2_score(y_test_nonscaled, y_pred)
+    rmse = root_mean_squared_error(y_test_nonscaled, y_pred)
+    
+    svr_results[factor] = {'model': svr, 'predictions': y_pred, 'r2': round(r2, 2), 'rmse': round(rmse, 2)}
+    all_predictions[factor] = y_pred
+
+all_predictions['incar_rate_national_real'] = real_df[0]
+```
+
+**Results**
+
+```{python}
+print('Single-feature model results (not averaged out to national level):')
+
+for key in svr_results.keys():
+
+    print(f"{key}: r2 = {svr_results[key]['r2']} / rmse = {svr_results[key]['rmse']}")
+```
+
+## Combined SVR model
+
+**Initial model**
+
+```{python}
+X_train, X_test, y_train, y_test = train_test_split(df, df['incar_rate_national'], train_size=0.8, random_state=16, stratify = df['year'])
+
+svr = SVR()
+
+svr.fit(X_train[['violent_crime_rate', 'prop_crime_rate', 'spending_rate','pov_rate', 'non_white_rate']], y_train)
+
+pred = svr.predict(X_test[['violent_crime_rate', 'prop_crime_rate', 'spending_rate','pov_rate', 'non_white_rate']])
+
+pred_df = pd.DataFrame(scaler.inverse_transform(pd.DataFrame({'incar_rate':pred,'tot_crime_rate':X_test['tot_crime_rate'], 'violent_crime_rate':X_test['violent_crime_rate'],
+                        'prop_crime_rate':X_test['prop_crime_rate'],'pov_rate':X_test['pov_rate'],'non_white_rate':X_test['non_white_rate'],
+                        'spending_rate':X_test['spending_rate']})),columns=['incar_rate','tot_crime_rate','violent_crime_rate', 'prop_crime_rate','pov_rate', 'non_white_rate', 'spending_rate'])
+
+all_predictions['all_incar_rate_pred'] = pred_df['incar_rate']
+```
+
+**Tuning**
+
+```{python}
+params = {
+    'kernel':['rbf'],
+    'C': [0.1, 1, 10, 100],
+    'gamma': [0.01, 0.1, 1, 'scale'],
+    'epsilon': [0.01, 0.1, 0.5]
+}
+
+grid_search = GridSearchCV(SVR(kernel='rbf'), params, cv=5, scoring='neg_root_mean_squared_error')
+grid_search.fit(X_train[['violent_crime_rate', 'prop_crime_rate', 'spending_rate','pov_rate', 'non_white_rate']], y_train)
+
+print('Best Parameters:', grid_search.best_params_)
+print('Best Score:', grid_search.best_score_)
+```
+
+**Tuned model**
+
+```{python}
+svr = SVR(C=10, epsilon=0.1, gamma=1)
+
+svr.fit(X_train[['violent_crime_rate', 'prop_crime_rate', 'spending_rate','pov_rate', 'non_white_rate']], y_train)
+
+pred = svr.predict(X_test[['violent_crime_rate', 'prop_crime_rate', 'spending_rate','pov_rate', 'non_white_rate']])
+
+pred_df = pd.DataFrame(scaler.inverse_transform(pd.DataFrame({'incar_rate':pred,'tot_crime_rate':X_test['tot_crime_rate'], 'violent_crime_rate':X_test['violent_crime_rate'],
+                        'prop_crime_rate':X_test['prop_crime_rate'],'pov_rate':X_test['pov_rate'],'non_white_rate':X_test['non_white_rate'],
+                        'spending_rate':X_test['spending_rate']})),columns=['incar_rate','tot_crime_rate','violent_crime_rate', 'prop_crime_rate','pov_rate', 'non_white_rate', 'spending_rate'])
+
+all_predictions['all_incar_rate_pred_tuned'] = pred_df['incar_rate']
+```
+
+**Metrics (not averaged to national level):**
+
+```{python}
+print('RMSE: ' + str(root_mean_squared_error(all_predictions['incar_rate_national_real'], pred_df['incar_rate'])))
+print('r2: ' +  str(r2_score(all_predictions['incar_rate_national_real'], pred_df['incar_rate'])))
+```
+
+**Metrics at national level:**
+
+```{python}
+pred_av = all_predictions.copy()
+
+pred_av = pred_av.groupby(['year', 'incar_rate_national_real'], as_index=False)[['violent_crime_rate','prop_crime_rate','spending_rate','pov_rate','non_white_rate','all_incar_rate_pred', 'all_incar_rate_pred_tuned']].mean()
+
+
+for factor in ['violent_crime_rate', 'prop_crime_rate', 'spending_rate','pov_rate', 'non_white_rate', 'all_incar_rate_pred', 'all_incar_rate_pred_tuned']:
+    print(factor)
+    print('   rmse: ' + str(root_mean_squared_error(pred_av['incar_rate_national_real'], pred_av[factor])))
+    print('   r2: ' + str(r2_score(pred_av['incar_rate_national_real'], pred_av[factor])))
+```
+
+**Feature importance measures:**
+
+```{python}
+# permutation importance
+results = permutation_importance(svr, X_train[['violent_crime_rate', 'prop_crime_rate', 'spending_rate','pov_rate', 'non_white_rate']], y_train, scoring='neg_mean_squared_error')
+
+importance = results.importances_mean
+
+# shap values
+import shap
+
+X_train, X_test, y_train, y_test = train_test_split(df, df[['incar_rate_national']], train_size=0.8, random_state=16, stratify = df['year'])
+
+X_train_summary = shap.kmeans(X_train[['violent_crime_rate','prop_crime_rate','spending_rate','pov_rate','non_white_rate']], 10)
+
+model = SVR(C=10, epsilon=0.1, gamma=1)
+model.fit(X_train[['violent_crime_rate','prop_crime_rate','spending_rate','pov_rate','non_white_rate']], y_train)
+
+ex = shap.KernelExplainer(model.predict, X_train_summary)
+
+shap_values = ex.shap_values(X_test[['violent_crime_rate','prop_crime_rate','spending_rate','pov_rate','non_white_rate',]])
+```
+
+## Visualizations
+
+**Single-feature models**
+
+```{python}
+sf_df = all_predictions.copy()
+
+sf_df.rename(columns = {'violent_crime_rate': 'Violent Crime Rate', 'prop_crime_rate': 'Property Crime Rate', 'pov_rate': 'Poverty Rate', 'non_white_rate':'Non-White Rate', 'spending_rate': 'Police Spending Rate (1k$)'}, inplace=True)
+sf_df.drop(['all_incar_rate_pred_tuned','all_incar_rate_pred'], axis=1,inplace=True)
+sf_df = pd.melt(sf_df, id_vars=['year', 'incar_rate_national_real'], var_name='variable', value_name='value')
+
+g = sns.FacetGrid(sf_df, col = 'variable', margin_titles=True, col_wrap=3, legend_out=False)
+g.map(sns.regplot, 'year', 'incar_rate_national_real', scatter=False, color="#1b9e77", ci=None, label='Linear model', line_kws ={'linestyle':'dotted'})
+g.map(sns.lineplot, 'year', 'incar_rate_national_real', color="black", label='Actual')
+g.map(sns.lineplot, 'year', 'value', color="#984fbd", linestyle='dashed',label='SVR prediction')
+g.set_titles(col_template="Predictions Based on \n{col_name}")
+g.set_axis_labels(x_var='Year', y_var='Value per 100k people')
+g.add_legend(loc='lower right',label_order=['Actual','Linear model','SVR prediction'])
+sns.move_legend(g,"lower right", bbox_to_anchor=(.92, .2))
+
+g.fig.subplots_adjust(top=0.85)
+g.fig.suptitle("Figure 3: Single-Feature Models are Outperformed by a Linear Model")
+
+g.savefig('prison-predictor-capstone/deliverables/M5-final/figure-html/single_graph.png', dpi=300)
+g
+```
+
+**Multi-variate model**
+
+```{python}
+sns.lineplot(x=all_predictions['year'], y=all_predictions['incar_rate_national_real'], 
+             label='Actual', color='black')
+sns.regplot(x=all_predictions['year'], y=all_predictions['incar_rate_national_real'], 
+             label='Linear model', color='#1b9e77',line_kws={'linestyle':'dotted'}, ci=None, scatter=False)
+sns.lineplot(x=all_predictions['year'], y=all_predictions['all_incar_rate_pred_tuned'], 
+             label='SVR Prediction', color ='#984fbd', linestyle='dashed',
+             err_kws={'alpha':0.15})
+             
+plt.title('Figure 4: Predictions Made Using all Features are Much Closer to Reality')
+plt.xlabel('Year')
+plt.ylabel('National Incarceration Rate (per 100k)')
+plt.legend()
+
+plt.savefig('prison-predictor-capstone/deliverables/M5-final/figure-html/all_graph.png', dpi=300, bbox_inches='tight')
+plt.show()
+```
+
+**SHAP plot**
+
+```{python}
+fig = plt.figure()
+
+shap.summary_plot(shap_values, X_test, feature_names=['Violent crime rate','Property crime rate','Spending rate','Poverty rate','Non-white rate'],cmap='plasma', show=False)
+
+fig.subplots_adjust(top=0.85)
+fig.suptitle("Figure 6: Police Spending Makes the Biggest\n Contributions to Predictions")
+
+fig.savefig('prison-predictor-capstone/deliverables/M5-final/figure-html/shap_graph.png',dpi=300)
+plt.show()
+```
+
+**Results table**
+
+```{python}
+pmap = LinearSegmentedColormap.from_list('purple', ['#984fbd', '#ffffff'], N=50) 
+
+factors = ['violent_crime_rate', 'prop_crime_rate', 'spending_rate','pov_rate', 'non_white_rate']
+
+metric_df = pd.DataFrame({'Feature':['Violent crime rate','Property crime rate','Police spending rate','Poverty rate','Non white rate'],
+                          'Correlation':[df[['incar_rate', factor]].corr().iloc[1,0] for factor in factors],
+                          'RMSEs':[round(root_mean_squared_error(pred_av['incar_rate_national_real'], pred_av[factor]), 2) for factor in factors],
+                          'R2 scores': [round(r2_score(pred_av['incar_rate_national_real'], pred_av[factor]),2) for factor in factors],
+                          'Feature \nimportance':[round(v,2) for i, v in enumerate(importance)],
+                          'SHAP \nvalues':[round(np.mean(np.abs(shap_values[:,i])), 2) for i in range(len(shap_values[0]))]})
+
+metric_df.set_index('Feature', inplace=True)
+metric_df.reset_index(inplace=True, level=['Feature'])
+
+df_print = metric_df.style.background_gradient(subset=['Correlation'],gmap=-metric_df['Correlation'],cmap=pmap, high=0.05).background_gradient(subset=['R2 scores'],gmap=-metric_df['R2 scores'],cmap=pmap, high=0.05).background_gradient(subset=['Feature \nimportance', 'SHAP \nvalues'], gmap=-metric_df['Feature \nimportance'], cmap=pmap, high=0.05).background_gradient(subset='RMSEs', gmap=metric_df['RMSEs'],cmap=pmap, high=0.05).format(precision=2).set_caption('    Table 2: All Model Results').format_index(formatter = None)
+df_print = df_print.set_properties(**{'text-align': 'center','font-family':'sans-serif'})
+
+dfi.export(df_print, 'prison-predictor-capstone/deliverables/M5-final/figure-html/table.png',table_conversion = 'matplotlib',dpi=300,)
+df_print
+```
+
+
+
+```{python}
+sns.set_style('ticks')
+
+bargraph_df = metric_df[['Feature', 'RMSEs']]
+
+bargraph_df.loc[len(bargraph_df)] = {'Feature': 'Combined', 'RMSEs': root_mean_squared_error(all_predictions['incar_rate_national_real'], all_predictions['all_incar_rate_pred_tuned'])}
+
+bargraph_df.sort_values(by='RMSEs', ascending=True, inplace=True)
+
+sns.barplot(data=bargraph_df, x='RMSEs', y='Feature', color="#984fbd")
+plt.axvline(root_mean_squared_error(df_one['incar_rate'], lin_pred),color="#1b9e77", linestyle='dotted', linewidth=3, label='Linear model baseline')
+
+plt.xlabel('RMSE (incarceration rate per 100k)')
+plt.ylabel('Model')
+plt.title('Figure 5: Features are Worse Predictors on\nTheir Own Than When Combined')
+plt.legend()
+
+plt.savefig('prison-predictor-capstone/deliverables/M5-final/figure-html/rmse_graph.png', dpi=300, bbox_inches='tight')
+plt.show()
+```
+
+## Error analysis
+
+```{python}
+err_df = all_predictions #CHANGE
+
+err_df['state'] = X_test.reset_index()['State']
+
+# err_df[['year', 'state']] = X_test.reset_index()[['year', 'State']]
+# err_df['pred'] = all_predictions['all_incar_rate_national_pred']
+# err_df['incar_rate_national'] = all_predictions['incar_rate_national']
+
+# err_df
+```
+
+```{python}
+y_err_df = pred_av.copy()
+
+y_err_df['error'] = (y_err_df['all_incar_rate_pred_tuned'] - y_err_df['incar_rate_national_real']) ** 2
+
+y_err_df['decade'] = pd.cut(y_err_df['year'], bins=[1980, 1990, 2000, 2010, 2020], labels=['1980s','1990s','2000s','2010s'])
+
+y_err_df = y_err_df.groupby('decade',as_index=False)['error'].mean()
+
+y_err_df['rmse'] = y_err_df['error'].apply(lambda x: np.sqrt(x))
+y_err_df
+```
+
+```{python}
+regions = {'New England':['Connecticut','Maine','Massachusetts','New Hampshire','Rhode Island', 'Vermont'],
+           'Middle Atlantic': ['New Jersey','New York','Pennsylvania'],
+           'East North Central':['Illinois','Indiana','Michigan','Ohio','Wisconsin'],
+           'West North Central':['Iowa','Kansas','Minnesota','Missouri','Nebraska','North Dakota','South Dakota'],
+           'South Atlantic': ['Delaware','Florida','Georgia','Maryland','North Carolina','South Carolina','Virginia','West Virginia'],
+           'East South Central': ['Alabama','Kentucky','Mississippi','Tennessee'],
+           'West South Central': ['Arkansas','Louisiana','Oklahoma','Texas'],
+           'Mountain': ['Arizona','Colorado','Idaho','Montana','Nevada','New Mexico','Utah','Wyoming'],
+           'Pacific': ['Alaska', 'California','Hawaii','Oregon','Washington']}
+
+def get_region(x):
+
+    for key in regions.keys():
+        if x in regions[key]:
+            return key
+        
+r_err_df = all_predictions.copy()
+
+r_err_df['state'] = X_test.reset_index()['State']
+
+r_err_df['region'] = r_err_df['state'].apply(lambda x: get_region(x))
+```
+
+
+```{python}
+r_err_df['error'] = (r_err_df['all_incar_rate_pred_tuned'] - r_err_df['incar_rate_national_real']) ** 2
+
+r_err_df = r_err_df.groupby('region',as_index=False).agg(
+    error=('error', 'mean'),
+    n=('state','count')
+)
+
+r_err_df['states'] = r_err_df['region'].apply(lambda x: regions[x])
+r_err_df['rmse'] = r_err_df['error'].apply(lambda x: np.sqrt(x))
+r_err_df.sort_values(by='rmse', inplace=True)
+
+r_err_df
+```
+
+```{python}
+r_err_df = r_err_df.explode('states')
+
+r_err_df['ab'] = r_err_df['states'].apply(lambda x: us_state_to_abbrev[x])
+```
+
+
+```{python}
+us_state_to_abbrev = {
+    "Alabama": "AL",
+    "Alaska": "AK",
+    "Arizona": "AZ",
+    "Arkansas": "AR",
+    "California": "CA",
+    "Colorado": "CO",
+    "Connecticut": "CT",
+    "Delaware": "DE",
+    "Florida": "FL",
+    "Georgia": "GA",
+    "Hawaii": "HI",
+    "Idaho": "ID",
+    "Illinois": "IL",
+    "Indiana": "IN",
+    "Iowa": "IA",
+    "Kansas": "KS",
+    "Kentucky": "KY",
+    "Louisiana": "LA",
+    "Maine": "ME",
+    "Maryland": "MD",
+    "Massachusetts": "MA",
+    "Michigan": "MI",
+    "Minnesota": "MN",
+    "Mississippi": "MS",
+    "Missouri": "MO",
+    "Montana": "MT",
+    "Nebraska": "NE",
+    "Nevada": "NV",
+    "New Hampshire": "NH",
+    "New Jersey": "NJ",
+    "New Mexico": "NM",
+    "New York": "NY",
+    "North Carolina": "NC",
+    "North Dakota": "ND",
+    "Ohio": "OH",
+    "Oklahoma": "OK",
+    "Oregon": "OR",
+    "Pennsylvania": "PA",
+    "Rhode Island": "RI",
+    "South Carolina": "SC",
+    "South Dakota": "SD",
+    "Tennessee": "TN",
+    "Texas": "TX",
+    "Utah": "UT",
+    "Vermont": "VT",
+    "Virginia": "VA",
+    "Washington": "WA",
+    "West Virginia": "WV",
+    "Wisconsin": "WI",
+    "Wyoming": "WY",
+    "District of Columbia": "DC",
+    "American Samoa": "AS",
+    "Guam": "GU",
+    "Northern Mariana Islands": "MP",
+    "Puerto Rico": "PR",
+    "United States Minor Outlying Islands": "UM",
+    "Virgin Islands, U.S.": "VI",
+}
+```
+
+```{python}
+import plotly.express as px
+
+fig = px.choropleth(r_err_df,
+                    locations='ab', 
+                    locationmode="USA-states", 
+                    scope="usa",
+                    color='rmse',
+                    color_continuous_scale="plasma",
+                    )
+
+fig.update_legends({'title':'RMSE'})
+fig.show()
+```

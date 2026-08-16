@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Emery Kerani">
+<meta name="dcterms.date" content="2026-08-15">
+
+<title>Crime and What Else?</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="writeup_v2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="writeup_v2_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="writeup_v2_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="writeup_v2_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="writeup_v2_files/libs/quarto-html/popper.min.js"></script>
+<script src="writeup_v2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="writeup_v2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="writeup_v2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="writeup_v2_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="writeup_v2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="writeup_v2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="writeup_v2_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#title-team-and-affiliations" id="toc-title-team-and-affiliations" class="nav-link active" data-scroll-target="#title-team-and-affiliations"><span class="header-section-number">1</span> Title, Team, and Affiliations</a></li>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract"><span class="header-section-number">2</span> Abstract</a></li>
+  <li><a href="#introduction-problem-and-research-questions" id="toc-introduction-problem-and-research-questions" class="nav-link" data-scroll-target="#introduction-problem-and-research-questions"><span class="header-section-number">3</span> Introduction: Problem and Research Questions</a></li>
+  <li><a href="#impact-and-stakeholders" id="toc-impact-and-stakeholders" class="nav-link" data-scroll-target="#impact-and-stakeholders"><span class="header-section-number">4</span> Impact and Stakeholders</a></li>
+  <li><a href="#related-work-and-background" id="toc-related-work-and-background" class="nav-link" data-scroll-target="#related-work-and-background"><span class="header-section-number">5</span> Related Work and Background</a></li>
+  <li><a href="#data-and-data-engineering" id="toc-data-and-data-engineering" class="nav-link" data-scroll-target="#data-and-data-engineering"><span class="header-section-number">6</span> Data and Data Engineering</a></li>
+  <li><a href="#ethics-and-responsible-use" id="toc-ethics-and-responsible-use" class="nav-link" data-scroll-target="#ethics-and-responsible-use"><span class="header-section-number">7</span> Ethics and Responsible Use</a></li>
+  <li><a href="#methods-and-evaluation" id="toc-methods-and-evaluation" class="nav-link" data-scroll-target="#methods-and-evaluation"><span class="header-section-number">8</span> Methods and Evaluation</a></li>
+  <li><a href="#results-and-visualizations" id="toc-results-and-visualizations" class="nav-link" data-scroll-target="#results-and-visualizations"><span class="header-section-number">9</span> Results and Visualizations</a></li>
+  <li><a href="#discussion-limitations-and-future-work" id="toc-discussion-limitations-and-future-work" class="nav-link" data-scroll-target="#discussion-limitations-and-future-work"><span class="header-section-number">10</span> Discussion, Limitations, and Future Work</a></li>
+  <li><a href="#conclusions-and-recommendations" id="toc-conclusions-and-recommendations" class="nav-link" data-scroll-target="#conclusions-and-recommendations"><span class="header-section-number">11</span> Conclusions and Recommendations</a></li>
+  <li><a href="#reproducibility-and-references" id="toc-reproducibility-and-references" class="nav-link" data-scroll-target="#reproducibility-and-references"><span class="header-section-number">12</span> Reproducibility and References</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">13</span> References</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="writeup_v2.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Crime and What Else?</h1>
+<p class="subtitle lead">Investigating the Predictive Power of Social Factors on Incarceration Rates</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Emery Kerani </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 15, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="title-team-and-affiliations" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Title, Team, and Affiliations</h1>
+<p><strong>Project title:</strong> <em>Crime and What Else? Investigating the Predictive Power of Social Factors on Incarceration Rates</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Role</th>
+<th>Willamette email</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Emery Kerani</td>
+<td>Owner Product Lead</td>
+<td>eskerani@willamette.edu</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Peer Stakeholder POs:</strong> Mary Rose Krouse, Shanti Brodnick, Rohan Srinivas Babu</p>
+<p><strong>Repository:</strong> <code>https://github.com/eskerani/prison-predictor-capstone/tree/main</code></p>
+</section>
+<section id="abstract" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Abstract</h1>
+<p>Crime is often taken for granted as the primary driver of incarceration in the United States, without accounting for underlying factors (e.g.&nbsp;poverty) or large-scale policies that have expanded the prison-industrial complex to an unprecedented level. This project aims to evaluate the truth of this dominant narrative by utilizing machine learning to assess how well a variety of factors are able to predict incarceration rates. Among both single-feature models and a model using all features to generate predictions, police spending had the lowest error rate and highest feature importance, indicating that state and local government spending on police is a better predictor of the national incarceration rate than either violent or property crime.</p>
+</section>
+<section id="introduction-problem-and-research-questions" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Introduction: Problem and Research Questions</h1>
+<p><strong>Problem statement:</strong> The United States prison system currently holds nearly 2 million people, and for decades has imprisoned its inhabitants at one of the highest rates in the world <span class="citation" data-cites="lurigio2024">(<a href="#ref-lurigio2024" role="doc-biblioref">Lurigio, 2024</a>)</span>. A variety of legal factors, including mandatory minimum sentences and “three strikes” laws, have contributed to the unprecedented rise in incarceration in the US since the 1970s and 80s <span class="citation" data-cites="defina2013 lurigio2024">(<a href="#ref-defina2013" role="doc-biblioref">DeFina &amp; Hannon, 2009</a>; <a href="#ref-lurigio2024" role="doc-biblioref">Lurigio, 2024</a>)</span>. The US incarceration rate has since levelled off, remaining relatively steady since the 2010s; however, this does not reflect the nation’s crime rate, which has fallen since peaking in in the 1990s <span class="citation" data-cites="pettit2018">(<a href="#ref-pettit2018" role="doc-biblioref">Pettit &amp; Gutierrez, 2018</a>)</span>. Given that the US’s criminal legal system wields tremendous power—power that is most often turned against already disadvantaged individuals and their communities—it is important that we recognize protective and risk factors for incarceration, many of which are social in nature <span class="citation" data-cites="lurigio2024 henry2020 pettit2018">(<a href="#ref-henry2020" role="doc-biblioref">Henry, 2020</a>; <a href="#ref-lurigio2024" role="doc-biblioref">Lurigio, 2024</a>; <a href="#ref-pettit2018" role="doc-biblioref">Pettit &amp; Gutierrez, 2018</a>)</span>. This project seeks to interrogate the dominant narrative that crime is the primary cause of incarceration by examining three other risk factors.</p>
+<p><strong>Primary research question:</strong> How do the predictive power of social factors (such as poverty, race, or government spending on police) compare to that of violent and property crime rates when using support vector regression to model the national incarceration rate?</p>
+<p><em>Secondary research question:</em> How does the predictive power of crime vary across different types of crime (violent vs.&nbsp;property crimes)?</p>
+</section>
+<section id="impact-and-stakeholders" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Impact and Stakeholders</h1>
+<p><strong>can maybe add more here???</strong></p>
+<p>The key stakeholders in this work are those who are most often targeted by criminalization and incarceration, primarily poor and BIPOC folks <span class="citation" data-cites="pettit2018">(<a href="#ref-pettit2018" role="doc-biblioref">Pettit &amp; Gutierrez, 2018</a>)</span>. Additionally, communities across the country are continually harmed by increasing incarceration rates, as incarceration has been shown to negatively impact both community health and poverty <span class="citation" data-cites="defina2013 wildeman2017">(<a href="#ref-defina2013" role="doc-biblioref">DeFina &amp; Hannon, 2009</a>; <a href="#ref-wildeman2017" role="doc-biblioref">Wildeman &amp; Wang, 2017</a>)</span>. By critically examining the circumstances that can contribute to incarceration, this project seeks to uplift the work of organizations such as Transformative Justice Community and the Oregon Justice Resource Center, which advocate for solutions to harm that shift our paradigm away from imprisonment.</p>
+</section>
+<section id="related-work-and-background" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Related Work and Background</h1>
+<p>For decades, data science and statistics have played a massively important role in prison reform and abolition causes; as just one example, we have known for well over three decades that the population of Black prisoners is disproportionate to the Black population in the US <span class="citation" data-cites="tonry1994">(<a href="#ref-tonry1994" role="doc-biblioref">Tonry, 1994</a>)</span>. Data concerning overall prison populations have also been key in tracking the effects of legislation concerning crime and sentencing, many of which contributed to astronomical growth of the US prison population <span class="citation" data-cites="mauer2001">(<a href="#ref-mauer2001" role="doc-biblioref">Mauer, 2001</a>)</span>. Police spending is another facet of prior research, particularly when it comes to questions of how to effectively and durably address crime—while increased policing may reduce crime in the short term, studies suggest that diverting money from policing into social services more reliably reduces crime in the long term <span class="citation" data-cites="beck2025">(<a href="#ref-beck2025" role="doc-biblioref">Beck, 2025</a>)</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figure-html/eda_graph.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 1: All variables of interest graphed across time; the national average is in darker purple and the surrounding lighter purple corresponds to the full range of state values.</figcaption>
+</figure>
+</div>
+<p>The raw data themselves can also reveal disparities in trends across time. As mentioned previously, the national incarceration rate grew exponentially in the 1980s and 90s, before levelling off around 2010 and then starting to fall <span class="citation" data-cites="bjs">(<a href="#ref-bjs" role="doc-biblioref">Bureau of Justice Statistics, n.d.</a>)</span>. Crime rates, however, have followed a very different pattern: the violent crime rate peaked in the mid-1990s and has been falling fairly steadily since, with only minor peaks; property crime rates have been falling consistently for virtually the entire window examined by this project <span class="citation" data-cites="fbi">(<a href="#ref-fbi" role="doc-biblioref">Federal Bureau of Investigation, 2025</a>)</span>. There is thus a clear disconnect between the national incarceration rate and both violent and non-violent crime rates. On first glance, both the rate of non-white residents and the rate of government spending on police mirror the incarceration rate much more clearly, with both growing somewhat linearly since the 1980s <span class="citation" data-cites="ipums spending">(<a href="#ref-ipums" role="doc-biblioref">Flood et al., 2025</a>; <a href="#ref-spending" role="doc-biblioref">United States Census Bureau, 2026</a>)</span>. The national poverty rate shows the most variability out of the factors examined, with various peaks and valleys over time <span class="citation" data-cites="pov">(<a href="#ref-pov" role="doc-biblioref">United States Census Bureau, 2025</a>)</span>.</p>
+<p>To this point, most of the work applying machine learning algorithms to data concerning the prison system has focused on predicting or classifying individual behaviors or risk factors. This project takes a more abstracted view of the legal system and its contributing factors as a whole in order to investigate the associations between variables.</p>
+</section>
+<section id="data-and-data-engineering" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Data and Data Engineering</h1>
+<p>This project combines data from five sources, all of which are at the state level and contain information for the years 1980-2020. Data about the incarcerated population of each state (excluding federal prisoners) was obtained from the Bureau of Justice Statistics’ Corrections Statistical Analysis Tool; crime data was downloaded from the FBI’s Summary Reporting System (SRS); data on police spending was collected by the Census Bureau and made available for download by the Urban Institute’s State and Local Finance Data tool; poverty data was collected by the Census Bureau and included the population of each state; and race data was estimated based on demographic information included in the IPUMS Current Population Survey (CPS). Given the historical nature of this project, all data sets were ingested as one-time .csv or .xlsx downloads.</p>
+<p>After being downloaded, the datasets were individually cleaned and wrangled into a standardized format. Incarceration data was pivoted from a wide to a long format, and national totals which included federal prisoners were excluded in favor of focusing on summed state values. Relevant columns were selected from the crime data and a new column was created to denote the total crime count by adding the violent crime and property crime columns. The District of Columbia was filtered out of the police spending data, and data types were made explicit. The format of the poverty dataset required a loop to extract the data, which were all stored in a single column that also included rows with years and state names. Finally, the CPS data required several steps: first, a binary variable was created to denote whether a given survey respondent identified as white or not; then the data were aggregated up to the state and year level using the weights included in the data, at which point the percentage and count per 100,000 people of each race category could be calculated; the last step was converting the FIPS codes provided by IPUMS to standard state abbreviations to be used when joining the data.</p>
+<p>Once all datasets had been cleaned and aggregated to the state and year level, they were joined together by state and year and filtered for the years 1980-2020. Using these combined data, all features were standardized by population (per 100k) based on the population estimates originally included in the poverty dataset. Additionally, yearly national totals were calculated for the population, poverty, and race columns.</p>
+<p>Though these data were generally fairly complete upon download, there were two notable quality issues encountered during the cleaning process. Police spending data was missing for all states in 2001 and 2003 through the Urban Institute; since the rise in police spending over the years is generally fairly steady, these values were imputed by averaging the spending in the years directly before and after years with missing data (which allowed the preservation of trends by state). Further, for two years (2013 and 2017) of poverty data, there were two estimated counts published for both population and poverty levels due to new measures being introduced in the survey. The new measures were given to only a proportion of the population, but because in theory both versions were estimating the same thing the values were combined by averaging.</p>
+<p>The final combined dataset contained 2,050 rows and 10 columns: state, year, total population, incarceration rate, total crime rate, violent crime rate, property crime rate, poverty rate, the rate of non-white residents, and police spending rate.</p>
+<p><em>Table 1: Sources</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 18%">
+<col style="width: 25%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Role</th>
+<th>Access</th>
+<th>Citation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Corrections Statistical Analysis Tool</td>
+<td>Incarceration counts</td>
+<td>One-time download</td>
+<td><span class="citation" data-cites="bjs">(<a href="#ref-bjs" role="doc-biblioref">Bureau of Justice Statistics, n.d.</a>)</span></td>
+</tr>
+<tr class="even">
+<td>FBI Summary Reporting System</td>
+<td>Crime counts</td>
+<td>One-time download</td>
+<td><span class="citation" data-cites="fbi">(<a href="#ref-fbi" role="doc-biblioref">Federal Bureau of Investigation, 2025</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>Census Bureau via Urban Institute</td>
+<td>Police spending data</td>
+<td>One-time download</td>
+<td><span class="citation" data-cites="spending">(<a href="#ref-spending" role="doc-biblioref">United States Census Bureau, 2026</a>)</span></td>
+</tr>
+<tr class="even">
+<td>Census Bureau</td>
+<td>Historical poverty data</td>
+<td>One-time download</td>
+<td><span class="citation" data-cites="pov">(<a href="#ref-pov" role="doc-biblioref">United States Census Bureau, 2025</a>)</span></td>
+</tr>
+<tr class="odd">
+<td>IPUMS CPS</td>
+<td>Race survey data</td>
+<td>One-time download</td>
+<td><span class="citation" data-cites="ipums">(<a href="#ref-ipums" role="doc-biblioref">Flood et al., 2025</a>)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Engineering summary:</strong> Raw data can be found in <code>data/raw/</code>. Cleaned individual datasets were deposited in <code>data/interim/</code>, which also contains a brief exploratory analysis. The processed and combined panel is in <code>data/processed/</code>, alongside the script used for cleaning at <code>data/processed/data_cleaning.qmd</code>.</p>
+</section>
+<section id="ethics-and-responsible-use" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Ethics and Responsible Use</h1>
+<p><strong>Privacy:</strong> Four out of the five datasets incorporated in this project were already highly aggregated to the state and year level. Data from the IPUMS CPS was downloaded at the original survey granularity (from which identifying household characteristics had already been removed) and aggregated up to the state/year level. Thus, because these data represent a high-level overview, they pose very little risk to individuals.</p>
+<p><strong>Fairness / equity:</strong> Where associations are found between social factors such as race or poverty and incarceration, the data must not be interpreted as these factors being indicators of criminality. For example, though it has been demonstrated that Black people are disproportionately imprisoned in the US, this is due to overpolicing and systemic oppression, <em>not</em> because of any inherent association between Blackness and criminality <span class="citation" data-cites="brown2021">(<a href="#ref-brown2021" role="doc-biblioref">Jones-Brown &amp; Williams, 2021</a>)</span>. Under no circumstances should this project be used to justify further policing or incarceration of marginalized communities.</p>
+<p><strong>Limitations of setting:</strong> The data used in this project come with several specific caveats attached. In particular, the accuracy of the Summary Reporting System’s crime data is impacted by several factors. A number of states were unable to provide complete data for various years. Where this happened, the FBI generated estimates by either extrapolating using a portion of the year’s data, or applying regional trends to a state’s most recent year of complete data. Additionally, several states have changed their reporting practices over time, which means that newer numbers may not be directly comparable to those collected previously. Finally, the SRS only collected information about the most serious offense that occurred in a given incident (e.g.&nbsp;if a homicide occurred in the course of a motor vehicle theft, only the homicide would be recorded), meaning that these data give us a clearer picture of the number of incidents that occurred rather than the actual total number of crimes. Data were also only collected for certain crimes within each category: homicide, rape, robbery, and aggravated assault are the violent crimes included, while the property crimes are made up of burglary, larceny, and motor vehicle theft. Further, it must be noted that all data used in this project are the product of surveys; though these surveys aim for representativeness, they can still only generate estimates, and thus these data should not be interpreted as the objective truth.</p>
+<p><strong>Non-causal framing:</strong> This project only examines the associations between variables and thus no conclusions should be made about whether or not any of the predictive factors used <em>cause</em> incarceration. Further, these data and the features used are by nature interconnected; some of the features used to generate predictions may have impacted others (such as police spending and crime rates). Single-variable models in particular should thus be taken with a grain of salt as it is impossible to truly isolate any variable.</p>
+</section>
+<section id="methods-and-evaluation" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Methods and Evaluation</h1>
+<p><strong>Design:</strong> This project primarily uses support vector regression (SVR), chosen because of its ability to deal with complex, non-linear data while remaining more straightforward and interpretable than methods such as XGBoost. SVR is also optimized for smaller datasets, which makes it an ideal choice for this project. All SVR models are compared to a baseline linear regression model, which was fitted to predict the national incarceration rate for each year of data. This was used to assess whether the predictions generated by the non-linear SVR models fit the actual national incarceration trend better than a simple line.</p>
+<p>Five single-variable models were trained, each using data from only one predictive factor to ensure that no other data affected predictions. Default parameters were used for all these models, both to ensure that each variable was treated the same way and because tuned models performed slightly worse than the default models for three out of five variables. In addition, one model was trained using all predictive factors as inputs in order to evaluate the importance of each factor when combined. This multi-variate model was tuned using a grid search, which evaluated the model’s performance (based on the root mean squared error) on every combination of a given set of hyperparameters in order to select the best combination. The hyperparameters in question were epsilon, which dictates how tolerant of errors the model is before penalizing them (forming its margin); C, which influences how much the model penalizes points that fall outside of the predictive margin; and gamma, which dictates how much individual training data points impact predictions. All SVR models used a radial basis function (RBF) kernel, which allowed them to account for non-linear relationships.</p>
+<p>All SVR models made predictions of the national incarceration rate using state-level variables, at which point the predictions were averaged by year to create a singular, aggregated prediction of the national incarceration rate for each year. This method turns SVR into a pseudo-voting regressor model and was chosen to mimic the way that state-level factors influence national outcomes (e.g.&nbsp;how the national incarceration rate for a given year in itself is roughly the average of all state incarceration rates in that year). These aggregated predictions were then used to calculate model evaluation metrics, using the real national incarceration rate as the true value.</p>
+<p><strong>Evaluation metrics:</strong> Three main evaluation metrics are used: correlation coefficient, R2 score, and root mean squared error (RMSE). The correlation coefficient is used as a preliminary evaluation of the linearity of relationships between variables, with the expectation that none will be particularly linear. The R2 score is used to evaluate how much of the variance in incarceration rate can be explained by each model, while the RMSE measures the average error across predictions. Additionally, permutation importance and SHAP values are used to determine the most influential feature of the final multi-variate model. The permutation importance of each feature is generated by randomly shuffling all of that feature’s data points in the test set and measuring how much the model’s predictions suffer overall as a result. SHAP values function slightly differently, by calculating each feature’s contribution to each prediction. The features that play the biggest role in driving predictions in either the positive or negative direction are said to be the most important. These two measures combine to provide a more robust understanding of how each feature factors into the model’s predictions.</p>
+<p><strong>Train / validation / holdout:</strong> Before modelling was performed, multicollinearity between predictive variables was checked using the variance inflation factor (VIF), which evaluates the extent to which correlations between predictors influence the variation in a model’s outcomes. An 80-20 split was used to create training and testing datasets for use with models. This split was stratified by year to ensure that models were trained on a portion of the data from each year; the result was that a randomly selected 40 states in each year were used to train models (a total of 1,640 rows), while the remaining 10 states were used to generate predictions for a given year (totalling 410 rows). <em>Only</em> the relevant data (e.g.&nbsp;the feature and national incarceration rate in a single-variable model) were included in the training and testing data, so that models did not learn associations between year or state and incarceration rates. Additionally, all features were scaled using a robust scaler before training and testing, to eliminate any bias that could by caused by size differences in the variables. The models’ predictions were also scaled accordingly, but were unscaled before calculating evaluation metrics to aid interpretibility.</p>
+</section>
+<section id="results-and-visualizations" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Results and Visualizations</h1>
+<p>As expected, none of the features were linearly correlated with state incarceration rates; all had a “weak” correlation coefficient of less than 0.5, demonstrating that none of these variables have an immediately clear influence on incarceration rates. Of the variables investigated, the non-white rate was the most correlated with incarceration rates at 0.46 and police spending was similar at 0.42, while the violent crime rate, poverty rate, and property crime rate all scored lower at 0.31, 0.15, and -0.08, respectively. The VIF was also checked both before and after scaling to evaluate correlations between predictive variables. Prior to scaling, the police spending rate, poverty rate, and violent crime rate had VIFs of 5.94, 8.52, and 9.14, demonstrating high multicollinearity. The property crime rate had a VIF of 11.08, which indicates particularly high standard error inflation due to correlations between variables. The non-white rate was the only variable that showed moderate collinearity at 3.22. After scaling, these numbers were dramatically reduced: all variables had VIFs ranging from 1.24 at the lowest (non-white rate) to 2.19 at the highest (violent crime rate), signifying moderate amounts of correlation between variables but nothing that would seriously inflate a model’s standard error.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figure-html/linear_graph.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 2: A line plot displaying the national incarceration rate in black and a linear model fitted to the data in purple.</figcaption>
+</figure>
+</div>
+<p>The first model, a linear model that was fitted to the national incarceration rate as a function of the year, was largely unable to account for the rate at which the national incarceration rate rose. It first overpredicted in the 1980s, underpredicted from the 1990s to the 2010s, and then overpredicted once more as the incarceration rate started to fall in the 2010s. The RMSE of this model was 66.03, meaning that on average its predictions were off by about 66 people incarcerated per 100,000. This is a fairly large margin of error given that at its peak the national incarceration rate was under 500 people incarcerated per 100,000. The model’s R2 score was middling at 0.611, leaving around 40% of the variance in the national incarceration rate unaccounted for.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figure-html/single_graph.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 3: A line plot displaying single-feature SVR predictions in purple, compared to both the linear model in green and the real national incarceration rate in black.</figcaption>
+</figure>
+</div>
+<p>However, the linear baseline model still performed better than the first five SVR models. When using single features (i.e.&nbsp;only police spending) as predictors of the national incarceration rate, the models generated performed poorly. Only two features (police spending at 69.83 and property crime rate at 79.95) had RMSEs of less than 100 people per 100k, with the violent crime rate, poverty rate, and non-white rate coming in at 109.92, 108.95, and 101.65. With the exception of police spending, the RMSE of which was within 3 units of the linear model’s, using single features as predictors generated models that were all much more prone to error than the linear model.</p>
+<p>For the most part, the R2 scores were similarly low. Several negative R2 scores, for the violent crime rate (-0.08) and poverty rate (-0.06) indicate outright that the linear model better explained the variance in the national incarceration rate; though positive, the poverty rate’s R2 score (0.08) indicates that only a very small fraction of the national incarceration rate is explainable by poverty. The property crime rate and police spending rate scored just under and over 0.5 at 0.43 and 0.57, respectively, indicating that these features are able to account for about 50% (+/- 7%) of the variance in the national incarceration rate. Similar to the RMSE, the police spending rate was the only variable that achieved an R2 score anywhere near that of the linear model. Though all of the single-feature models were worse than a linear model, the one trained on police spending rates had the best RMSE and R2 score, and was the closest to being on par with the linear model.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figure-html/all_graph.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 4: A line plot displaying model predictions of the national incarceration rate over time using all features (in dashed purple) as inputs, compared to the linear model in dotted green.</figcaption>
+</figure>
+</div>
+<p>A model trained on all features performed markedly better, with an RMSE of 39.6 and an R2 score of 0.86 after averaging predictions across years. Tuning improved these values to 27.5 and 0.93, respectively. In either case, the model’s RMSE was well below that of the linear baseline, distinguishing it as the only SVR model used in this project that achieved better performance than a linear model. The tuned model’s predictions also had under half the average error of the best single-feature model, and nearly doubled its R2 value.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figure-html/rmse_graph.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 5: A barplot showing the RMSE of all models used in this project.</figcaption>
+</figure>
+</div>
+<p>Relative to all other features, police spending rate was the most important in generating the tuned model’s predictions with a permutation importance of 0.239, which shows that the model’s performance suffered the most when police spending data was shuffled. The violent crime rate had the second-largest permutation importance at 0.15, followed by the property crime rate, non-white rate, and poverty rate at 0.143, 0.109, and 0.068, respecitvely. Similarly, police spending had the highest average absolute SHAP value (0.21), which suggests that variable had the greatest influence on the model’s performance. Spending was followed in SHAP values by the property crime rate (0.12), the violent crime rate (0.11), the non-white rate (0.08), and the poverty rate (0.06).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figure-html/shap_graph.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 6: Graph displaying each instance of each feature, that instance’s value by color, and how that instance impacted the mode’s predictions.</figcaption>
+</figure>
+</div>
+<p>The graph above displays the SHAP values for all variables on the x axis, using color to denote a given point’s value relative to the other points of the variable. This can thus be used to better understand the directional associations between variables and predictions. Of particular note is the fact that lower values for police spending rate tend to drive the model’s prediction for incarceration rate downwards, while higher values drive it upwards; the poverty rate and non-white rate mimic this association to a lesser magnitude. In the case of both the property and violent crime rate, however, this association is reversed: <em>higher</em> crime rates drive incarceration rate predictions downwards, while lower crime rates tend to drive it upwards.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figure-html/table.png" class="img-fluid figure-img"></p>
+<figcaption>Table 2: Table containing all model results, with best results highlighted in darker purple.</figcaption>
+</figure>
+</div>
+<p>Of the decades included in analysis, the multi-variable model generated the best predictions for 2000 onwward (with RMSEs of 17.91 and 20.41 for the 2000s and 2010s, respectively) and performed slightly worse on data from the 1980s (which had an RMSE of 24.21). The 1990s was the decade with the highest error by far, at an RMSE of 40.15. This suggests that the input features may have been less associated with the national incarceration rate in the 1990s in particular, and vice versa for the 2000s. With respect to geography, the model’s accuracy varied widely: the model largely performed the best in the South, with the West and East South Central census regions (comprised of Arkansas, Louisiana, Oklahoma, Texas, Alabama, Kentucky, Mississippi, and Tennessee) both having RMSEs of less than 40. The West North Central, Pacific, New England, and East North Central regions all had RMSEs of 40-44, while the South Atlantic, Mountain, and Middle Atlantic regions performed the worst, all with with RMSEs of almost 50 or above. However, it must be noted that predictions were not generated based on even numbers of instances of states from each region in the testing data; due to stratification by year when creating the train-test split, the state distributions were shuffled and thus regional appearences in testing data vary widely from 27-93.</p>
+</section>
+<section id="discussion-limitations-and-future-work" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Discussion, Limitations, and Future Work</h1>
+<p><strong>Interpretation:</strong> The results above indicate that across the board, police spending rate serves as the best (or most influential) predictor for national incarceration rate using SVR models. Using SHAP values as an indicator of directionality, lower police spending resulted in lower predicted incarceration rates. In nearly all evaluation metrics, property crime rates were a close second, meaning that where crime was associated with incarceration rates in this project it was primarily property crime and not violent crime. Both types of crime were negatively associated with predictions–where crime rates were higher, incarceration rate predictions were pushed lower (and vice versa). This finding is supported by the fact that until the 2010s, the national incarceration rate was continuously rising despite both violent and property crimes falling in that same period. Additionally, the performance difference between single-feature and combined-feature models (and the difference between the single-feature SVR models and a linear baseline model) confirms that none of these variables truly exist in isolation, and all must be accounted for in order to build a fuller picture of what might influence incarceration in the United States.</p>
+<p><strong>Limitations:</strong> One of the chief limitations of this work lies in the fact that much of the data used were estimates. All data sources were based on surveys, and while all aim to provide representative information about the US population, they should not be taken as the definitive truth. Similarly, the data on crime counts was based only on <em>reports or arrests made</em>, which very likely results in undercounting; out of all reports, only seven crimes are accounted for in the FBI’s Summary Reporting System (homicide, rape, robbery, aggravated assault, burglary, larceny, and motor vehicle theft), narrowing the pool even further. Additionally, as noted previously, this study was purely observational; no causal claims can be made about the links between any of the variables explored and incarceration. Rather, the goal of this project is to note associations between variables.</p>
+<p><strong>Limitations:</strong> One of the chief limitations of this work lies in the fact that much of the data used were estimates. All data sources were based on surveys and should not be taken as the definitive truth. Similarly, the data on crime counts was based only on <em>reports or arrests made</em>, which very likely results in undercounting; additionally, only a small number of offenses were included in the SRS, narrowing the pool even further. Finally, as noted previously, this study was purely observational. No causal claims can be made about the links between any of the variables explored and incarceration. Rather, the goal of this project is to note associations between variables.</p>
+<p><strong>Future work:</strong> Future work could include exploring how predictions function when examining variations in the type of incarceration (e.g.&nbsp;jails vs.&nbsp;prisons, men vs.&nbsp;women); concentrating on smaller geographical areas such as counties to incorporate more data and look at more granular associations; using more complex models such as XGBoost or neural networks; or examining variations on the data used here (e.g.&nbsp;looking at different types of police spending or incorporating a wider definition of each crime type).</p>
+</section>
+<section id="conclusions-and-recommendations" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Conclusions and Recommendations</h1>
+<p>Police spending largely served as the most influential predictor of national incarceration rates, and in particular lower police spending drove predictions up while higher spending drove them down. Low-performing single-feature models indicated that no single factor can fully account for the US’s incarceration rate. Taken together these results suggest that diverting funding from police to social services or other government functions <span class="citation" data-cites="beck2025">(as explored by <a href="#ref-beck2025" role="doc-biblioref">Beck, 2025</a>)</span> may be associated with lowered incarceration rates. Thus, any efforts to reduce incarceration should take a wide variety of factors into account, but keep police and legal system spending in mind as a factor when engineering reforms.</p>
+</section>
+<section id="reproducibility-and-references" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Reproducibility and References</h1>
+<p><strong>Reproduce main results:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> prison-predictor-capstone</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render data/processed/data_cleaning.qmd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render deliverables/M5-final/analysis.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Dependencies:</strong> <code>requirements.txt</code> in repo root.</p>
+</section>
+<section id="references" class="level1 unnumbered" data-number="13">
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">13 References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-beck2025" class="csl-entry" role="listitem">
+Beck, B. (2025). Local government spending: Policing versus social services. <em>Annual Review of Criminology</em>, <em>8</em>, 505–528. <a href="https://doi.org/10.1146/annurev-criminol-111523-122639">https://doi.org/10.1146/annurev-criminol-111523-122639</a>
+</div>
+<div id="ref-bjs" class="csl-entry" role="listitem">
+Bureau of Justice Statistics. (n.d.). <em>Corrections statistical analysis tool</em> [Data set]. Retrieved from <a href="https://csat.bjs.ojp.gov/advanced-query">https://csat.bjs.ojp.gov/advanced-query</a>
+</div>
+<div id="ref-defina2013" class="csl-entry" role="listitem">
+DeFina, R., &amp; Hannon, L. (2009). The impact of mass incarceration on poverty. <em>Crime &amp; Delinquency</em>, <em>59</em>(4), 562–586. <a href="https://doi.org/10.1177/0011128708328864">https://doi.org/10.1177/0011128708328864</a>
+</div>
+<div id="ref-fbi" class="csl-entry" role="listitem">
+Federal Bureau of Investigation. (2025). <em>Summary reporting system</em> [Data set]. Retrieved from <a href="https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/downloads">https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/downloads</a>
+</div>
+<div id="ref-ipums" class="csl-entry" role="listitem">
+Flood, S., King, M., Rodgers, R., Ruggles, S., Warren, J. R., Backman, D., … Williams, K. C. W. (2025). <em>IPUMS CPS</em> (Version 13.0) [Data set]. <a href="https://doi.org/10.18128/D030.V13.0">https://doi.org/10.18128/D030.V13.0</a>
+</div>
+<div id="ref-henry2020" class="csl-entry" role="listitem">
+Henry, B. (2020). Adverse experiences, mental health, and substance use disorders as social determinants of incarceration. <em>Journal of Community Psychology</em>, <em>48</em>(3), 744–762. <a href="https://doi.org/10.1002/jcop.22289">https://doi.org/10.1002/jcop.22289</a>
+</div>
+<div id="ref-brown2021" class="csl-entry" role="listitem">
+Jones-Brown, D., &amp; Williams, J. M. (2021). Over-policing black bodies: The need for multidimensional and transformative reforms. <em>Journal of Ethicity in Criminal Justice</em>, <em>19</em>(3–4), 181–187. <a href="https://doi.org/10.1080/15377938.2021.1992326">https://doi.org/10.1080/15377938.2021.1992326</a>
+</div>
+<div id="ref-lurigio2024" class="csl-entry" role="listitem">
+Lurigio, A. J. (2024). The golden anniversary of mass incarceration in america. <em>The Prison Journal</em>, <em>104</em>(3), 271–295. <a href="https://doi.org/10.1177/00328855241240131">https://doi.org/10.1177/00328855241240131</a>
+</div>
+<div id="ref-mauer2001" class="csl-entry" role="listitem">
+Mauer, M. (2001). The causes and consequences of prison growth in the united states. <em>Punishment &amp; Society</em>, <em>3</em>(1), 9–20.
+</div>
+<div id="ref-pettit2018" class="csl-entry" role="listitem">
+Pettit, B., &amp; Gutierrez, C. (2018). Mass incarceration and racial inequality. <em>The American Journal of Economics and Sociology</em>, <em>77</em>(3–4), 1153–1182. <a href="https://doi.org/10.1111/ajes.12241">https://doi.org/10.1111/ajes.12241</a>
+</div>
+<div id="ref-tonry1994" class="csl-entry" role="listitem">
+Tonry, M. (1994). Racial disproportion in US prisons. <em>British Journal of Criminology</em>, <em>34</em>, 97–115.
+</div>
+<div id="ref-pov" class="csl-entry" role="listitem">
+United States Census Bureau. (2025). <em>Number of poor and poverty rate by state</em> [Data set]. Retrieved from <a href="https://www.census.gov/data/tables/time-series/demo/income-poverty/historical-poverty-people.html">https://www.census.gov/data/tables/time-series/demo/income-poverty/historical-poverty-people.html</a>
+</div>
+<div id="ref-spending" class="csl-entry" role="listitem">
+United States Census Bureau. (2026). <em>Annual survey of state and local government finances</em> [Data set]. <span>Nikhita Airi, Lucy Dadayan, Gabriella Garriga, and Kim Rueben at the Urban Institute</span>. Retrieved from <a href="https://state-local-finance-data.taxpolicycenter.org/pages.cfm">https://state-local-finance-data.taxpolicycenter.org/pages.cfm</a>
+</div>
+<div id="ref-wildeman2017" class="csl-entry" role="listitem">
+Wildeman, C., &amp; Wang, E. A. (2017). Mass incarceration, public health, and widening inequality in the USA. <em>The Lancet</em>, <em>389</em>(10077), 1464–1474. <a href="https://doi.org/10.1016/S0140-6736(17)30259-3">https://doi.org/10.1016/S0140-6736(17)30259-3</a>
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
