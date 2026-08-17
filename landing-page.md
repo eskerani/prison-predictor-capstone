@@ -1,3 +1,4 @@
+<img width="1701" height="1413" alt="all_graph" src="https://github.com/user-attachments/assets/d209eb88-104d-48fd-b70e-232bd0f3c515" />
 # Welcome to the landing page for *Crime and What Else? Investigating the Predictive Power of Social Factors on Incarceration Rates*
 (A capstone project completed by Emery Kerani)
 
@@ -9,7 +10,7 @@ If you would like to explore the past deliverables for this project, they can be
 * [Milestone 2/Data Summary](https://github.com/eskerani/prison-predictor-capstone/tree/main/deliverables/M2-data-summary)
 * [Milestone 3/Draft Poster](https://github.com/eskerani/prison-predictor-capstone/tree/main/deliverables/M3-poster-draft)
 * [Milestone 4/Draft Writeup](https://github.com/eskerani/prison-predictor-capstone/tree/main/deliverables/M4-writeup-draft)
-* [Milestone 5/Final Deliverables](https://github.com/eskerani/prison-predictor-capstone/tree/main/deliverables/M5-final) (*Currently in progress*)
+* [Milestone 5/Final Deliverables](https://github.com/eskerani/prison-predictor-capstone/tree/main/deliverables/M5-final) 
 
 If you would like to investigate the data or cleaning process, navigate to the [data folder](https://github.com/eskerani/prison-predictor-capstone/tree/main/data). 
 Raw data is contained in the `raw` folder; preliminary findings/EDA are in the `interim` folder; and the final combined dataset and script used to clean it are in the `processed` folder.
@@ -23,19 +24,19 @@ The visualizations used on the poster are reproduced here, in case you would lik
 
 ---
 
-<img width="1844" height="1499" alt="all_graph" src="https://github.com/user-attachments/assets/4c8df799-35ff-41c1-86ee-3b2364cfc189" />
+<img width="1701" height="1413" alt="all_graph" src="https://github.com/user-attachments/assets/bc0d716a-e3b0-401a-8e9a-6fa06b920ada" />
 
 *Figure 2: A time series graph displaying the national incarceration rate compared to SVR predictions based on police spending data only (green dotted) and all features (orange dashed)*
 
 ---
 
-<img width="2249" height="1500" alt="rmse_graph" src="https://github.com/user-attachments/assets/e2a6c868-657c-4c62-a9d2-e84bb873e1e0" />
+<img width="2009" height="1413" alt="rmse_graph" src="https://github.com/user-attachments/assets/549f62ff-440f-469a-8e09-493aa71ade62" />
 
 *Figure 3: A bar plot depicting the RMSEs of all models for comparison*
 
 ---
 
-<img width="2230" height="933" alt="poster_table" src="https://github.com/user-attachments/assets/418f9e6c-f55b-4e35-b8ab-0af392fa2999" />
+<img width="2217" height="933" alt="poster_table" src="https://github.com/user-attachments/assets/ec619f99-bb3f-4105-802e-33ff6db5d13d" />
 
 *Table 1: A table displaying the results and stats for all models/variables. The best results are highlighted in darker purple, with worse results in lighter shades*
 
