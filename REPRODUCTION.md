@@ -21,3 +21,5 @@ This document details how to reproduce this project. Follow the steps below:
 11. Open `deliverables/M5-final`.
 12. Run `analysis.qmd` to generate results and plots.
 13. Render `writeup_v2.qmd` to generate the final writeup. 
+
+**NOTE: All data sources should always be cited; use of IPUMS data requires a submission to their [bibliography](https://bibliography.ipums.org/).**
