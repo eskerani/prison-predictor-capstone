@@ -72,7 +72,7 @@ data/
 `ddi <- read_ipums_ddi("./capstone/cps_00001.xml")`
 `data <- read_ipums_micro(ddi)`
 
-### Dataset 4: Police Spending
+### Dataset 5: Police Spending
 
 - **Source:** https://state-local-finance-data.taxpolicycenter.org/pages.cfm#
 - **License:** These data are compiled by the Urban Institute based on data collected and released by the Census Bureau; both institutions should be recognized in a citation. 
