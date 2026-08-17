@@ -1,4 +1,3 @@
-<img width="1701" height="1413" alt="all_graph" src="https://github.com/user-attachments/assets/d209eb88-104d-48fd-b70e-232bd0f3c515" />
 # Welcome to the landing page for *Crime and What Else? Investigating the Predictive Power of Social Factors on Incarceration Rates*
 (A capstone project completed by Emery Kerani)
 
