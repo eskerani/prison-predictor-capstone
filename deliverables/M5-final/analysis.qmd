@@ -393,21 +393,21 @@ metric_df = pd.DataFrame({'Feature':['Violent crime rate','Property crime rate',
 metric_df.set_index('Feature', inplace=True)
 metric_df.reset_index(inplace=True, level=['Feature'])
 
-df_print = metric_df.style.background_gradient(subset=['Correlation'],gmap=-metric_df['Correlation'],cmap=pmap, high=0.05).background_gradient(subset=['R2 scores'],gmap=-metric_df['R2 scores'],cmap=pmap, high=0.05).background_gradient(subset=['Feature \nimportance', 'SHAP \nvalues'], gmap=-metric_df['Feature \nimportance'], cmap=pmap, high=0.05).background_gradient(subset='RMSEs', gmap=metric_df['RMSEs'],cmap=pmap, high=0.05).format(precision=2).set_caption('    Table 2: All Model Results').format_index(formatter = None)
+df_print = metric_df.style.background_gradient(subset=['Correlation'],gmap=-metric_df['Correlation'],cmap=pmap, high=0.05).background_gradient(subset=['R2 scores'],gmap=-metric_df['R2 scores'],cmap=pmap, high=0.05).background_gradient(subset=['Feature \nimportance', 'SHAP \nvalues'], gmap=-metric_df['Feature \nimportance'], cmap=pmap, high=0.05).background_gradient(subset='RMSEs', gmap=metric_df['RMSEs'],cmap=pmap, high=0.05).format(precision=2).set_caption('    Table 1: All Model Results').format_index(formatter = None)
 df_print = df_print.set_properties(**{'text-align': 'center','font-family':'sans-serif'})
 
 dfi.export(df_print, 'prison-predictor-capstone/deliverables/M5-final/figure-html/table.png',table_conversion = 'matplotlib',dpi=300,)
 df_print
 ```
 
-
+**RMSE plot:**
 
 ```{python}
 sns.set_style('ticks')
 
 bargraph_df = metric_df[['Feature', 'RMSEs']]
 
-bargraph_df.loc[len(bargraph_df)] = {'Feature': 'Combined', 'RMSEs': root_mean_squared_error(all_predictions['incar_rate_national_real'], all_predictions['all_incar_rate_pred_tuned'])}
+bargraph_df.loc[len(bargraph_df)] = {'Feature': 'Combined', 'RMSEs': root_mean_squared_error(pred_av['incar_rate_national_real'], pred_av['all_incar_rate_pred_tuned'])}
 
 bargraph_df.sort_values(by='RMSEs', ascending=True, inplace=True)
 
