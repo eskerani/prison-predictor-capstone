@@ -120,7 +120,7 @@ For the most part, the R<sup>2</sup> scores were similarly low. Several negative
 
 ![A line plot displaying model predictions of the national incarceration rate over time using all features (in dashed purple) as inputs with the standard deviation of pre-aggregated predictions in lighter purple, compared to the linear model in dotted green.](figure-html/all_graph.png)
 
-A model trained on all features performed markedly better, with an RMSE of 39.6 and an R<sup>2</sup> score of 0.86 after averaging predictions across years. Tuning improved these values to 27.5 and 0.93, respectively. In either case, the model's RMSE was well below that of the linear baseline, distinguishing it as the only SVR model used in this project that achieved better performance than a linear model. The tuned model's predictions also had under half the average error of the best single-feature model, and nearly doubled its R<sup>2</sup> value.
+A model trained on all features performed markedly better, with an RMSE of 39.6 and an R<sup>2</sup> score of 0.86 after averaging predictions across years. Tuning (using `C=10`, `epsilon=0.1`, and `gamma=1`) improved these values to 27.5 and 0.93, respectively. In either case, the model's RMSE was well below that of the linear baseline, distinguishing it as the only SVR model used in this project that achieved better performance than a linear model. The tuned model's predictions also had under half the average error of the best single-feature model, and nearly doubled its R<sup>2</sup> value.
 
 ![A barplot showing the RMSE of all models used in this project, compared to the linear model's RMSE marked as a dotted green line.](figure-html/rmse_graph.png)
 
